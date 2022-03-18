@@ -1,19 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   bresenham.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/09 17:35:05 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/03/17 15:12:19 by wmonacho         ###   ########lyon.fr   */
+/*   Created: 2022/03/18 16:29:41 by wmonacho          #+#    #+#             */
+/*   Updated: 2022/03/18 16:38:07 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	main(int argc, char **argv)
-{
-	ft_parsing(argc, argv);
-	return (0);
+void	bresenham(t_pixel pixel, t_data img)
+{	
+	pixel.pente = pixel.dy / pixel.dx;
+	pixel.x = 0;
+	while (pixel.x < pixel.x2 - pixel.x1)
+	{
+		pixel.x++;
+		pixel.y = (pixel.pente * pixel.x) + pixel.y1;
+		if (pixel.x + pixel.x1 > 0 && pixel.y > 0 && pixel.x + pixel.x1 < 1920 && pixel.y < 1080)
+		{
+			my_mlx_pixel_put(&img, pixel.x + pixel.x1, pixel.y, 0x00FF0000);
+		}
+	}
 }
