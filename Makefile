@@ -6,7 +6,7 @@
 #    By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 17:48:16 by wmonacho          #+#    #+#              #
-#    Updated: 2022/03/18 18:24:48 by wmonacho         ###   ########lyon.fr    #
+#    Updated: 2022/03/23 09:25:33 by wmonacho         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CFLAGS =	-Wall -Wextra -Werror -I .
 
 CC =		gcc
 
-LIBSDIR =	libft/
+LIBSDIR =	../libft/
 
 OBJS_DIR = .objs
 
@@ -27,8 +27,8 @@ FILES = main.c								\
 		bresenham.c							\
 		debug.c								\
 		parsing.c							\
-		get_next_line/get_next_line.c		\
-		get_next_line/get_next_line_utils.c	\
+		../get_next_line/get_next_line.c		\
+		../get_next_line/get_next_line_utils.c	\
 
 all: libs $(NAME)
 
@@ -40,7 +40,7 @@ $(NAME): $(OBJ) $(LIBSDIR)libft.a
 	
 $(OBJS_DIR)/%.o:		%.c fdf.h ${LIBSDIR}libft.h ${LIBSDIR}libft.a Makefile
 				mkdir -p $(dir $@)
-				${CC} ${CFLAGS} -Ilibft/ -c $< -o $@
+				${CC} ${CFLAGS} -I$(LIBSDIR) -c $< -o $@
 
 clean :
 				${MAKE} clean -C ${LIBSDIR}

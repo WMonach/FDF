@@ -6,13 +6,12 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 16:49:11 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/03/18 18:25:56 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/03/23 15:16:45 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx/mlx.h"
 #include "fdf.h"
-
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -30,7 +29,6 @@ int	main(int argc, char **argv)
 	t_data	img;
 	t_pixel	pixel;
 
-
 	pixel.x1 = 0;
 	pixel.x2 = 2000;
 	pixel.y2 = 1000;
@@ -43,7 +41,7 @@ int	main(int argc, char **argv)
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 			&img.endian);
 	printf("lol\n");
-	fdf.maps = ft_parsing(argc, argv, fdf.maps);
+	fdf.maps = ft_parsing(argc, argv, &fdf);
 	fdf.pixels = pixel;
 	bresenham(fdf.pixels, img);
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);

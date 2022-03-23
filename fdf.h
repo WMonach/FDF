@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:40:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/03/18 18:21:29 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/03/23 16:44:52 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <string.h>
-# include "get_next_line/get_next_line.h"
-# include "libft/libft.h"
+# include "../get_next_line/get_next_line.h"
+# include "../libft/libft.h"
 # include "mlx/mlx.h"
 
 typedef struct s_point
@@ -27,6 +27,8 @@ typedef struct s_point
 	float	x;
 	float	y;
 	float	z;
+	float	x_max;
+	float	y_max;
 }	t_point;
 
 typedef struct s_data
@@ -59,10 +61,9 @@ typedef struct s_fdf
 	t_point	**maps;
 }	t_fdf;
 
-
-t_point	**ft_parsing(int argc, char **argv, t_point **maps);
+t_point	**ft_parsing(int argc, char **argv, t_fdf *fdf);
 void	ft_print_tab(t_point *tab, int size);
-t_point	**set_map(t_point **maps, int x, int y);
+t_point	**set_map(t_point **maps);
 int		main(int argc, char **argv);
 void	bresenham(t_pixel pixel, t_data img);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
