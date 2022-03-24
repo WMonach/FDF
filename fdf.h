@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:40:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/03/23 16:44:52 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/03/24 16:49:13 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,12 @@ typedef struct s_fdf
 {
 	t_data	data;
 	t_pixel	pixels;
-	t_point	**maps;
+	t_point	*maps;
 }	t_fdf;
 
-t_point	**ft_parsing(int argc, char **argv, t_fdf *fdf);
+t_point	*ft_parsing(int argc, char **argv, t_fdf *fdf);
 void	ft_print_tab(t_point *tab, int size);
-t_point	**set_map(t_point **maps);
+void	set_map(t_point *maps);
 int		main(int argc, char **argv);
 void	bresenham(t_pixel pixel, t_data img);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
