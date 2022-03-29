@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 10:53:17 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/03/29 18:12:23 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/03/29 18:21:30 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,23 +49,17 @@ void	ft_matrix_projection(t_fdf *fdf)
 	}
 }
 
-int	ft_calculate_ratio(int ratio, int ratio_x, int ratio_y, t_fdf *fdf)
+int	ft_calculate_ratio(int ratio_x, int ratio_y, t_fdf *fdf)
 {
 	if (ratio_x >= ratio_y)
 	{
-		if (ratio_y >= ratio)
-			return (ratio);
-		else
-			return (ratio_y);
+		return (ratio_y);
 	}
 	if (ratio_x <= ratio_y)
 	{
-		if (ratio_x >= ratio)
-			return (ratio);
-		else
-			return (ratio_x);
+		return (ratio_x);
 	}
-	return (ratio);
+	return (1);
 }
 
 void	ft_calibration(t_fdf *fdf, int ratio_x, int ratio_y, int ratio)
@@ -79,8 +73,7 @@ void	ft_calibration(t_fdf *fdf, int ratio_x, int ratio_y, int ratio)
 	i = -1;
 	ratio_x = 1920 / fdf->map[0]->x_max;
 	ratio_y = 1080 / fdf->map[0]->y_max;
-	ratio = 1080 / fdf->map[0]->z_max;
-	ratio = ft_calculate_ratio(ratio, ratio_x, ratio_y, fdf);
+	ratio = ft_calculate_ratio(ratio_x, ratio_y, fdf);
 	while (++i < fdf->map[0]->y_max)
 	{
 		j = -1;
