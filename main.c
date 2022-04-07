@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 16:49:11 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/03/29 12:24:05 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/04/07 15:31:03 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,16 @@ int	main(int argc, char **argv)
 	void	*mlx_win;
 	t_fdf	fdf;
 	t_data	img;
-	t_pixel	pixel;
 
-	pixel.x1 = 0;
-	pixel.x2 = 2000;
-	pixel.y2 = 1000;
-	pixel.y1 = 0;
-	pixel.dy = pixel.y2 - pixel.y1;
-	pixel.dx = pixel.x2 - pixel.x1;
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
 	img.img = mlx_new_image(mlx, 1920, 1080);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 			&img.endian);
-	printf("lol\n");
 	ft_parsing(argc, argv, &fdf);
-	//ft_matrix_rotation(&fdf);
-	fdf.pixels = pixel;
-	bresenham(fdf.pixels, img);
+	ft_matrix(&fdf);
+	ft_draw(img, &fdf);
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
 	mlx_loop(mlx);
 }
+ 

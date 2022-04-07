@@ -6,7 +6,7 @@
 #    By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 17:48:16 by wmonacho          #+#    #+#              #
-#    Updated: 2022/03/23 09:25:33 by wmonacho         ###   ########lyon.fr    #
+#    Updated: 2022/03/30 16:44:52 by wmonacho         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,8 @@
 NAME =		fdf
 
 CFLAGS =	-Wall -Wextra -Werror -I .
+
+SFLAGS =	-fsanitize=address -g3
 
 CC =		gcc
 
@@ -29,6 +31,7 @@ FILES = main.c								\
 		parsing.c							\
 		../get_next_line/get_next_line.c		\
 		../get_next_line/get_next_line_utils.c	\
+		matrix.rotation.c						\
 
 all: libs $(NAME)
 
@@ -36,7 +39,7 @@ libs:
 	$(MAKE) -C $(LIBSDIR)
 
 $(NAME): $(OBJ) $(LIBSDIR)libft.a
-	$(CC) $(OBJ) $(LIBSDIR)libft.a -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	$(CC) $(SFLAGS) $(OBJ) $(LIBSDIR)libft.a -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 	
 $(OBJS_DIR)/%.o:		%.c fdf.h ${LIBSDIR}libft.h ${LIBSDIR}libft.a Makefile
 				mkdir -p $(dir $@)

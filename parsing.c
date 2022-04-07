@@ -6,26 +6,21 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:38:45 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/03/29 16:30:45 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/04/07 16:15:30 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	ft_fill_maps(t_point **map, char *z_value, int i, int j)
+void	ft_fill_maps(t_fdf	*fdf, char *z_value, int i, int j)
 {
-	map[i][j].x = j;
-	map[i][j].y = i;
-	map[i][j].z = atoi(z_value);
+	fdf->map[i][j].x = j;
+	fdf->map[i][j].y = i;
+	fdf->map[i][j].z = atoi(z_value);
 	if (j == 0 && i == 0)
-		map[0]->z_max = map[i][j].z;
-	else if (map[i][j].z > map[0]->z_max)
-		map[0]->z_max = map[i][j].z;
-	printf("%f\n", map[i][j].x);
-	printf("%f\n", map[i][j].y);
-	printf("%f\n", map[i][j].z);
-	printf("z_max =%f\n", map[0]->z_max);
-	printf("\n");
+		fdf->z_max = fdf->map[i][j].z;
+	else if (fdf->map[i][j].z > fdf->z_max)
+		fdf->z_max = fdf->map[i][j].z;
 }
 
 void	set_maps(t_fdf *fdf, int fd)
@@ -37,46 +32,47 @@ void	set_maps(t_fdf *fdf, int fd)
 
 	i = -1;
 	line = get_next_line(fd);
-	while (++i < fdf->map[0]->y_max && line != NULL)
+	while (++i < fdf->y_max && line != NULL)
 	{
 		j = 0;
 		line = ft_strtrim(line, "\n");
 		tab = ft_split(line, ' ');
 		while (line != NULL && tab[j])
 		{
-			ft_fill_maps((fdf->map), tab[j], i, j);
+			ft_fill_maps(fdf, tab[j], i, j);
+			// printf("map[%d][%d].x=%f\n", i, j, fdf->map[i][j].x);
+			// printf("map[%d][%d].y=%f\n", i, j, fdf->map[i][j].y);
+			// printf("map[%d][%d].z=%f\n", i, j, fdf->map[i][j].z);
 			j++;
 		}
 		free(line);
 		line = get_next_line(fd);
 	}
-	printf("%d\n", i);
 }
 
 void	ft_malloc_maps(t_fdf *fdf, char *line, int fd)
 {
-	int		i;
-	int		x;
-	int		y;
+	int			i;
+	char		**tab;
 
 	i = 0;
 	line = get_next_line(fd);
-	x = ft_strlen(line) / 2;
-	y = 0;
+	line = ft_strtrim(line, "\n");
+	tab = ft_split(line, ' ');
+	while (tab[i] != NULL)
+		i++;
+	fdf->x_max = i;
+	i = 0;
+	fdf->y_max = 0;
 	while (line != NULL)
 	{
 		free(line);
 		line = get_next_line(fd);
-		y++;
+		fdf->y_max++;
 	}
-	fdf->map = (t_point **)malloc(sizeof(t_point *) * (y));
-	while (i < y)
-	{
-		fdf->map[i] = (t_point *)malloc(sizeof(t_point) * (x));
-		i++;
-	}
-	fdf->map[0]->x_max = x;
-	fdf->map[0]->y_max = y;
+	fdf->map = (t_point **)malloc(sizeof(t_point *) * (fdf->y_max));
+	while (i < fdf->y_max)
+		fdf->map[i++] = (t_point *)malloc(sizeof(t_point) * (fdf->x_max));
 	free(line);
 }
 
