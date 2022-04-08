@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:38:45 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/04/07 16:15:30 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/04/08 12:34:43 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,10 @@ int	ft_parsing(int size, char **argv, t_fdf *fdf)
 		return (0);
 	if (argv == NULL)
 		return (0);
-	fd = open("txt.txt", 0, O_RDONLY);
+	fd = open(argv[1], 0, O_RDONLY);
 	ft_malloc_maps(fdf, line, fd);
 	close(fd);
-	fd = open("txt.txt", 0, O_RDONLY);
+	fd = open(argv[1], 0, O_RDONLY);
 	set_maps(fdf, fd);
 	close(fd);
 	return (1);
