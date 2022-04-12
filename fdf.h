@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:40:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/04/08 17:06:00 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/04/12 12:27:04 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,13 @@ typedef struct s_fdf
 	float	z_mat;
 }	t_fdf;
 
+typedef struct s_vars
+{
+	void	*mlx;
+	void	*win;
+	t_fdf	data;
+}				t_vars;
+
 int		ft_parsing(int argc, char **argv, t_fdf *fdf);
 void	ft_print_tab(t_point *tab, int size);
 void	set_map(t_point **map);
@@ -74,7 +81,7 @@ int		main(int argc, char **argv);
 void	ft_draw(t_data img, t_fdf *fdf);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	ft_matrix(t_fdf *fdf);
-void	ft_zoom(t_fdf *fdf, int zoom);
+void	ft_zoom(t_fdf *fdf, float zoom);
 void	ft_matrix_projection(t_fdf *fdf);
 float	ft_calculate_diff(float ratio_x, float ratio_y);
 void	ft_calibration(t_fdf *fdf, float ratio_x, float ratio_y, float ratio);

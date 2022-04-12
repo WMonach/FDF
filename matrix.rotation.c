@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 10:53:17 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/04/08 17:29:45 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/04/12 12:24:40 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,13 @@ void	ft_calibrate_z(t_fdf *fdf)
 		while (j < fdf->x_max)
 		{
 			// printf("beforemap[%d][%d].z=%f\n", i, j, fdf->map[i][j].z);
-			if (fdf->map[i][j].z != 0 && fdf->z_max > compare / 2)
-				fdf->map[i][j].z = fdf->map[i][j].z / (4);
+			if (fdf->map[i][j].z != 0 && fdf->z_max >= compare / 2)
+			{
+				if (fdf->z_max >= compare * 2)
+					fdf->map[i][j].z = fdf->map[i][j].z / ((fdf->z_max / compare) * 4);
+				if (fdf->z_max < compare * 2)
+					fdf->map[i][j].z = fdf->map[i][j].z / ((compare / fdf->z_max) * 4);
+			}
 			// printf("aftermap[%d][%d].z=%f\n", i, j, fdf->map[i][j].z);
 			j++;
 		}
@@ -128,7 +133,7 @@ void	ft_calibration(t_fdf *fdf, float ratio_x, float ratio_y, float ratio)
 	}
 }
 
-void	ft_zoom(t_fdf *fdf, int zoom)
+void	ft_zoom(t_fdf *fdf, float zoom)
 {
 	int		i;
 	int		j;
@@ -139,7 +144,9 @@ void	ft_zoom(t_fdf *fdf, int zoom)
 		j = 0;
 		while (j < fdf->x_max)
 		{
+			printf("%f\n", fdf->map[i][j].x);
 			fdf->map[i][j].x = fdf->map[i][j].x * zoom;
+			printf("%f\n", zoom);
 			fdf->map[i][j].y = fdf->map[i][j].y * zoom;
 			fdf->map[i][j].z = fdf->map[i][j].z * zoom;
 			j++;
