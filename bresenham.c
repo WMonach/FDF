@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 16:29:41 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/04/07 15:58:51 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/04/13 12:50:40 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ float	ft_max(float max1, float max2)
 	return (max1);
 }
 
-void	ft_bresenham(t_data img, t_fdf *fdf, float max)
+void	ft_bresenham(t_data *img, t_fdf *fdf, float max)
 {
 	float	i;
 
@@ -52,18 +52,18 @@ void	ft_bresenham(t_data img, t_fdf *fdf, float max)
 	{
 		fdf->temp.x1 = fdf->pixel.x1 + (fdf->pixel.dx * i / max);
 		fdf->temp.y1 = fdf->pixel.y1 + (fdf->pixel.dy * i / max);
-		if (fdf->temp.x1 < 1920 && fdf->temp.y1 < 1080
+		if (fdf->temp.x1 < 1919 && fdf->temp.y1 < 1079
 			&& fdf->temp.x1 >= 0 && fdf->temp.y1 >= 0)
 		{
 			ft_rounded(fdf->temp.x1, fdf->temp.y1, fdf);
-			my_mlx_pixel_put(&img, (int)fdf->temp.x1,
-				(int)fdf->temp.y1, 0x0000FF00);
+			my_mlx_pixel_put(img, (int)fdf->temp.x1,
+				(int)fdf->temp.y1, 0x4876ff);
 		}
 		i++;
 	}
 }
 
-void	ft_name(t_data img, t_fdf *fdf, int i, int j)
+void	ft_name(t_data *img, t_fdf *fdf, int i, int j)
 {
 	if (j + 1 < fdf->x_max && i + 1 < fdf->y_max)
 	{
@@ -116,7 +116,7 @@ void	ft_formal_calculation(t_fdf *fdf, int i, int j, int mode)
 	fdf->pixel.max = ft_max(fabsf(fdf->pixel.dx), fabsf(fdf->pixel.dy));
 }
 
-void	ft_draw(t_data img, t_fdf *fdf)
+void	ft_draw(t_data *img, t_fdf *fdf)
 {
 	int	i;
 	int	j;

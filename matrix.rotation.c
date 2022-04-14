@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 10:53:17 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/04/12 12:24:40 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/04/14 14:55:34 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	ft_matrix_projection(t_fdf *fdf)
 		j = 0;
 		while (j < fdf->x_max)
 		{
-			fdf->map[i][j].z = 0;
+			// fdf->map[i][j].z = 0;
 			// printf("map[%d][%d].x=%f\n", i, j, fdf->map[i][j].x);
 			// printf("map[%d][%d].y=%f\n", i, j, fdf->map[i][j].y);
 			j++;
@@ -112,9 +112,6 @@ void	ft_calibration(t_fdf *fdf, float ratio_x, float ratio_y, float ratio)
 	ratio_y = (1079) / (fdf->y_mat - 1) / 1.5;
 	// printf("ratio=%f\n", ratio_y);
 	// printf("ratio=%f\n", ratio_x);
-	printf("fdf->x_max=%f\n", fdf->x_max);
-	printf("fdf->y_max=%f\n", fdf->y_max);
-	printf("fdf->y_max=%f\n", fdf->z_max);
 	ratio = ft_calculate_diff(ratio_x, ratio_y);
 	// printf("ratio=%f\n", ratio);
 	while (++i < fdf->y_max)
@@ -126,9 +123,9 @@ void	ft_calibration(t_fdf *fdf, float ratio_x, float ratio_y, float ratio)
 			y = fdf->map[i][j].y;
 			fdf->map[i][j].x = x * ratio + ((1919 - fdf->x_mat * ratio) / 2);
 			fdf->map[i][j].y = y * ratio + ((1079 - fdf->y_mat * ratio) / 2);
-			// printf("map[%d][%d].x=%f\n", i, j, fdf->map[i][j].x);
-			// printf("map[%d][%d].y=%f\n", i, j, fdf->map[i][j].y);
-			// printf("map[%d][%d].z=%f\n", i, j, fdf->map[i][j].z);
+			printf("map[%d][%d].x=%f\n", i, j, fdf->map[i][j].x);
+			printf("map[%d][%d].y=%f\n", i, j, fdf->map[i][j].y);
+			printf("map[%d][%d].z=%f\n", i, j, fdf->map[i][j].z);
 		}
 	}
 }
