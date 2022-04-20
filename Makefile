@@ -6,7 +6,7 @@
 #    By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 17:48:16 by wmonacho          #+#    #+#              #
-#    Updated: 2022/04/13 12:52:20 by wmonacho         ###   ########lyon.fr    #
+#    Updated: 2022/04/15 11:16:07 by wmonacho         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ FILES = main.c								\
 		bresenham.c							\
 		debug.c								\
 		parsing.c							\
+		zoom.c									\
 		../get_next_line/get_next_line.c		\
 		../get_next_line/get_next_line_utils.c	\
 		matrix.rotation.c						\

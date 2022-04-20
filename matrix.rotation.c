@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 10:53:17 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/04/14 14:55:34 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/04/15 10:46:35 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,28 +127,6 @@ void	ft_calibration(t_fdf *fdf, float ratio_x, float ratio_y, float ratio)
 			printf("map[%d][%d].y=%f\n", i, j, fdf->map[i][j].y);
 			printf("map[%d][%d].z=%f\n", i, j, fdf->map[i][j].z);
 		}
-	}
-}
-
-void	ft_zoom(t_fdf *fdf, float zoom)
-{
-	int		i;
-	int		j;
-
-	i = 0;
-	while (i < fdf->y_max)
-	{
-		j = 0;
-		while (j < fdf->x_max)
-		{
-			printf("%f\n", fdf->map[i][j].x);
-			fdf->map[i][j].x = fdf->map[i][j].x * zoom;
-			printf("%f\n", zoom);
-			fdf->map[i][j].y = fdf->map[i][j].y * zoom;
-			fdf->map[i][j].z = fdf->map[i][j].z * zoom;
-			j++;
-		}
-		i++;
 	}
 }
 

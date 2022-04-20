@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:40:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/04/13 12:47:22 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/04/15 14:44:42 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ typedef struct s_fdf
 	float	x_mat;
 	float	y_mat;
 	float	z_mat;
+	float	lgnmax;
+	float	latmax;
 }	t_fdf;
 
 int		ft_parsing(int argc, char **argv, t_fdf *fdf);
@@ -81,7 +83,7 @@ int		main(int argc, char **argv);
 void	ft_draw(t_data *img, t_fdf *fdf);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	ft_matrix(t_fdf *fdf);
-void	ft_zoom(t_fdf *fdf, float zoom);
+void	ft_zoom(t_fdf *fdf);
 void	ft_matrix_projection(t_fdf *fdf);
 float	ft_calculate_diff(float ratio_x, float ratio_y);
 void	ft_calibration(t_fdf *fdf, float ratio_x, float ratio_y, float ratio);
@@ -91,6 +93,10 @@ void	ft_matrix_rz(t_fdf *fdf);
 void	ft_formal_calculation(t_fdf *fdf, int i, int j, int mode);
 void	ft_rounded(float number1, float number2, t_fdf	*fdf);
 float	ft_max(float max1, float max2);
+void	ft_calibrate_z(t_fdf *fdf);
+void	ft_calibration_zoom(t_fdf *fdf, float ratio_x,
+			float ratio_y, float ratio);
+void	ft_set_up_mat(t_fdf *fdf);
 
 # define BUFFER 100
 # define TETA 0.61540309
