@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 16:49:11 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/04/15 13:28:30 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/03 16:11:00 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,19 @@ int	key_hook(int keycode, t_fdf *fdf)
 	fdf->data.addr = mlx_get_data_addr(fdf->data.img, &fdf->data.bits_per_pixel, &fdf->data.line_length,
 			&fdf->data.endian);
 	if (keycode == 125)
-		ft_calibration_zoom(fdf, 0, 0, 0);
+		ft_calibration_zoom(fdf);
+	if (keycode == 126)
+		ft_calibration_dezoom(fdf);
 	if (keycode == 124)
 	{
+		//ft_calibrate_z(fdf);
 		ft_matrix_rx(fdf);
-		ft_matrix_projection(fdf);
-		//ft_calibration(fdf, 0, 0, 0);
+		ft_calibration(fdf, 0, 0, 0);
 	}
 	if (keycode == 123)
 	{
-		ft_calibrate_z(fdf);
+		//ft_calibrate_z(fdf);
 		ft_matrix_ry(fdf);
-		ft_matrix_projection(fdf);
 		ft_calibration(fdf, 0, 0, 0);
 	}
 	ft_draw(&fdf->data, fdf);

@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 10:53:17 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/04/15 10:46:35 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/03 16:29:54 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,13 @@ void	ft_calibrate_z(t_fdf *fdf)
 	int		i;
 	int		j;
 
-	i = 0;
+	i = -1;
 	compare = ft_calculate_diffinv(fdf->x_max, fdf->y_max);
-	while (i < fdf->y_max)
+	while (++i < fdf->y_max)
 	{
-		j = 0;
-		while (j < fdf->x_max)
+		j = -1;
+		while (++j < fdf->x_max)
 		{
-			// printf("beforemap[%d][%d].z=%f\n", i, j, fdf->map[i][j].z);
 			if (fdf->map[i][j].z != 0 && fdf->z_max >= compare / 2)
 			{
 				if (fdf->z_max >= compare * 2)
@@ -50,11 +49,9 @@ void	ft_calibrate_z(t_fdf *fdf)
 				if (fdf->z_max < compare * 2)
 					fdf->map[i][j].z = fdf->map[i][j].z / ((compare / fdf->z_max) * 4);
 			}
-			// printf("aftermap[%d][%d].z=%f\n", i, j, fdf->map[i][j].z);
-			j++;
 		}
-		i++;
 	}
+	ft_set_up_mat(fdf);
 }
 
 void	ft_matrix(t_fdf *fdf)
@@ -108,8 +105,8 @@ void	ft_calibration(t_fdf *fdf, float ratio_x, float ratio_y, float ratio)
 	float	y;
 
 	i = -1;
-	ratio_x = (1919) / ((fdf->x_mat) - 1) / 1.5;
-	ratio_y = (1079) / (fdf->y_mat - 1) / 1.5;
+	ratio_x = (1920) / ((fdf->x_mat) - 1);
+	ratio_y = (1080) / ((fdf->y_mat) - 1);
 	// printf("ratio=%f\n", ratio_y);
 	// printf("ratio=%f\n", ratio_x);
 	ratio = ft_calculate_diff(ratio_x, ratio_y);
@@ -121,13 +118,16 @@ void	ft_calibration(t_fdf *fdf, float ratio_x, float ratio_y, float ratio)
 		{
 			x = fdf->map[i][j].x;
 			y = fdf->map[i][j].y;
-			fdf->map[i][j].x = x * ratio + ((1919 - fdf->x_mat * ratio) / 2);
-			fdf->map[i][j].y = y * ratio + ((1079 - fdf->y_mat * ratio) / 2);
+			fdf->map[i][j].x = x * ratio + ((1920 - fdf->x_mat * ratio));
+			fdf->map[i][j].y = y * ratio + ((1080 - fdf->y_mat * ratio));
+			// fdf->map[i][j].x = x * ratio - ((1920 - x));
+			// fdf->map[i][j].y = y * ratio - ((1080 - y));
 			printf("map[%d][%d].x=%f\n", i, j, fdf->map[i][j].x);
 			printf("map[%d][%d].y=%f\n", i, j, fdf->map[i][j].y);
 			printf("map[%d][%d].z=%f\n", i, j, fdf->map[i][j].z);
 		}
 	}
+	ft_set_up_mat(fdf);
 }
 
 void	ft_matrix_rx(t_fdf *fdf)
@@ -155,6 +155,7 @@ void	ft_matrix_rx(t_fdf *fdf)
 		}
 		i++;
 	}
+	ft_set_up_mat(fdf);
 }
 
 void	ft_matrix_ry(t_fdf *fdf)
@@ -179,6 +180,7 @@ void	ft_matrix_ry(t_fdf *fdf)
 		}
 		i++;
 	}
+	ft_set_up_mat(fdf);
 }
 
 void	ft_matrix_rz(t_fdf *fdf)

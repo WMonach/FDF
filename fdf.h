@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:40:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/04/15 14:44:42 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/03 16:10:37 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,9 @@ void	ft_formal_calculation(t_fdf *fdf, int i, int j, int mode);
 void	ft_rounded(float number1, float number2, t_fdf	*fdf);
 float	ft_max(float max1, float max2);
 void	ft_calibrate_z(t_fdf *fdf);
-void	ft_calibration_zoom(t_fdf *fdf, float ratio_x,
-			float ratio_y, float ratio);
+void	ft_calibration_zoom(t_fdf *fdf);
 void	ft_set_up_mat(t_fdf *fdf);
+void	ft_calibration_dezoom(t_fdf *fdf);
 
 # define BUFFER 100
 # define TETA 0.61540309
