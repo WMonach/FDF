@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:38:45 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/04/08 12:34:43 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/04 15:37:16 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ft_fill_maps(t_fdf	*fdf, char *z_value, int i, int j)
 {
-	fdf->map[i][j].x = j;
-	fdf->map[i][j].y = i;
+	fdf->map[i][j].x = j - ((fdf->x_max - 1) / 2);
+	fdf->map[i][j].y = i - ((fdf->y_max - 1) / 2);
 	fdf->map[i][j].z = atoi(z_value);
 	if (j == 0 && i == 0)
 		fdf->z_max = fdf->map[i][j].z;
@@ -82,6 +82,8 @@ int	ft_parsing(int size, char **argv, t_fdf *fdf)
 	char	*line;
 
 	line = NULL;
+	fdf->rotx = 1;
+	fdf->roty = 1;
 	if (size == 0)
 		return (0);
 	if (argv == NULL)

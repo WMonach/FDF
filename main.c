@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 16:49:11 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/03 16:11:00 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/04 16:37:23 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,27 @@ int	key_hook(int keycode, t_fdf *fdf)
 	fdf->data.addr = mlx_get_data_addr(fdf->data.img, &fdf->data.bits_per_pixel, &fdf->data.line_length,
 			&fdf->data.endian);
 	if (keycode == 125)
-		ft_calibration_zoom(fdf);
+		ft_move_down(fdf);
 	if (keycode == 126)
-		ft_calibration_dezoom(fdf);
+		ft_move_up(fdf);
 	if (keycode == 124)
-	{
-		//ft_calibrate_z(fdf);
-		ft_matrix_rx(fdf);
-		ft_calibration(fdf, 0, 0, 0);
-	}
+		ft_move_left(fdf);
 	if (keycode == 123)
+		ft_move_right(fdf);
+	if (keycode == 83)
 	{
-		//ft_calibrate_z(fdf);
-		ft_matrix_ry(fdf);
-		ft_calibration(fdf, 0, 0, 0);
+		ft_matrix_rx(fdf);
+		fdf->rotx++;
 	}
+	if (keycode == 84)
+		ft_calibration_zoom(fdf);
+	if (keycode == 85)
+	{
+		ft_matrix_ry(fdf);
+		fdf->roty++;
+	}
+	if (keycode == 87)
+		ft_calibration_dezoom(fdf);
 	ft_draw(&fdf->data, fdf);
 	mlx_put_image_to_window(fdf->vars.mlx, fdf->vars.win, fdf->data.img, 0, 0);
 	return (0);
@@ -56,8 +62,6 @@ int	main(int argc, char **argv)
 	t_fdf	fdf;
 	t_vars	vars;
 
-	fdf.latmax = 1079;
-	fdf.lgnmax = 1919;
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, 1920, 1080, "Hello world!");
 	fdf.vars = vars;

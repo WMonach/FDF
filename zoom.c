@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 10:46:40 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/03 16:10:17 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/04 14:42:08 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,22 +65,15 @@ void	ft_calibration_zoom(t_fdf *fdf)
 {
 	int		i;
 	int		j;
-	float	xl;
-	float	yl;
-	float	zl;
 
 	i = -1;
-	xl = fdf->x_mat / 2.00;
-	yl = fdf->y_mat / 2.00;
-	zl = fdf->z_max / 2.00;
 	while (++i < fdf->y_max)
 	{
 		j = -1;
 		while (++j < fdf->x_max)
 		{
-			fdf->map[i][j].x = fdf->map[i][j].x * 1.05 + (xl * (1 - 1.05));
-			fdf->map[i][j].y = fdf->map[i][j].y * 1.05 + (yl * (1 - 1.05));
-			fdf->map[i][j].z = fdf->map[i][j].z * 1.05 + (zl * (1 - 1.05));
+			fdf->map[i][j].x = fdf->map[i][j].x * 1.15 + (960 * (1 - 1.15));
+			fdf->map[i][j].y = fdf->map[i][j].y * 1.15 + (540 * (1 - 1.15));
 			// printf("map[%d][%d].x=%f\n", i, j, fdf->map[i][j].x);
 			// printf("map[%d][%d].y=%f\n", i, j, fdf->map[i][j].y);
 			// printf("map[%d][%d].z=%f\n", i, j, fdf->map[i][j].z);
@@ -93,22 +86,15 @@ void	ft_calibration_dezoom(t_fdf *fdf)
 {
 	int		i;
 	int		j;
-	float	xl;
-	float	yl;
-	float	zl;
 
 	i = -1;
-	xl = fdf->x_mat / 2.00;
-	yl = fdf->y_mat / 2.00;
-	zl = fdf->z_max / 2.00;
 	while (++i < fdf->y_max)
 	{
 		j = -1;
 		while (++j < fdf->x_max)
 		{
-			fdf->map[i][j].x = fdf->map[i][j].x * 0.95 + (xl * (1 - 0.95));
-			fdf->map[i][j].y = fdf->map[i][j].y * 0.95 + (yl * (1 - 0.95));
-			fdf->map[i][j].z = fdf->map[i][j].z * 0.95 + (zl * (1 - 0.95));
+			fdf->map[i][j].x = fdf->map[i][j].x * 0.85 + (960 * (1 - 0.85));
+			fdf->map[i][j].y = fdf->map[i][j].y * 0.85 + (540 * (1 - 0.85));
 			// printf("map[%d][%d].x=%f\n", i, j, fdf->map[i][j].x);
 			// printf("map[%d][%d].y=%f\n", i, j, fdf->map[i][j].y);
 			// printf("map[%d][%d].z=%f\n", i, j, fdf->map[i][j].z);

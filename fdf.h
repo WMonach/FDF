@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:40:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/03 16:10:37 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/04 16:48:09 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,14 @@
 # include "../get_next_line/get_next_line.h"
 # include "../libft/libft.h"
 # include "mlx/mlx.h"
+
+typedef struct s_default
+{
+	float	x;
+	float	y;
+	float	z;
+	float	**dfault;
+}				t_default;
 
 typedef struct s_point
 {
@@ -61,19 +69,22 @@ typedef struct s_vars
 
 typedef struct s_fdf
 {
-	t_data	data;
-	t_pixel	pixel;
-	t_pixel	temp;
-	t_point	**map;
-	t_vars	vars;
-	float	x_max;
-	float	y_max;
-	float	z_max;
-	float	x_mat;
-	float	y_mat;
-	float	z_mat;
-	float	lgnmax;
-	float	latmax;
+	t_data		data;
+	t_default	**dfault;
+	t_pixel		pixel;
+	t_pixel		temp;
+	t_point		**map;
+	t_vars		vars;
+	float		x_max;
+	float		y_max;
+	float		z_max;
+	float		x_mat;
+	float		y_mat;
+	float		z_mat;
+	float		lgnmax;
+	float		latmax;
+	int			rotx;
+	int			roty;
 }	t_fdf;
 
 int		ft_parsing(int argc, char **argv, t_fdf *fdf);
@@ -97,6 +108,11 @@ void	ft_calibrate_z(t_fdf *fdf);
 void	ft_calibration_zoom(t_fdf *fdf);
 void	ft_set_up_mat(t_fdf *fdf);
 void	ft_calibration_dezoom(t_fdf *fdf);
+void	ft_move_right(t_fdf *fdf);
+void	ft_move_up(t_fdf *fdf);
+void	ft_move_down(t_fdf *fdf);
+void	ft_move_left(t_fdf *fdf);
+void	ft_set_data(t_fdf *fdf);
 
 # define BUFFER 100
 # define TETA 0.61540309
