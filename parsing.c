@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:38:45 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/04 15:37:16 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/05 16:30:19 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,9 @@ int	ft_parsing(int size, char **argv, t_fdf *fdf)
 	char	*line;
 
 	line = NULL;
+	fdf->cptzoom = 1;
+	fdf->cptdezoom = 1;
+	fdf->cptzoomzoom = 1;
 	fdf->rotx = 1;
 	fdf->roty = 1;
 	if (size == 0)

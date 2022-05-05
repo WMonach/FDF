@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 16:49:11 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/04 16:37:23 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/05 17:19:50 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ int	key_hook(int keycode, t_fdf *fdf)
 	fdf->data.addr = mlx_get_data_addr(fdf->data.img, &fdf->data.bits_per_pixel, &fdf->data.line_length,
 			&fdf->data.endian);
 	if (keycode == 125)
-		ft_move_down(fdf);
+	{
+		fdf->posy += 15;
+		ft_matrix(fdf, 0, 0);
+	}
 	if (keycode == 126)
 		ft_move_up(fdf);
 	if (keycode == 124)
@@ -41,18 +44,40 @@ int	key_hook(int keycode, t_fdf *fdf)
 	if (keycode == 83)
 	{
 		ft_matrix_rx(fdf);
-		fdf->rotx++;
+		ft_set_data(fdf);
+		ft_calibration(fdf, 0, 0, 0);
 	}
 	if (keycode == 84)
+	{
+		fdf->cptzoom += 0.05;
+		//fdf->cptdezoom += 0.05;
+		//if (fdf->cptzoomzoom == 1)
+		ft_calibration(fdf, 0, 0, 0);
 		ft_calibration_zoom(fdf);
+		ft_invcalibration(fdf, 0, 0, 0);
+		fdf->cptzoomzoom = 0;
+	}
 	if (keycode == 85)
 	{
 		ft_matrix_ry(fdf);
-		fdf->roty++;
+		ft_set_data(fdf);
+		ft_calibration(fdf, 0, 0, 0);
 	}
 	if (keycode == 87)
+	{
+		//fdf->cptzoom -= 0.05;
+		fdf->cptdezoom -= 0.05;
+		//if (fdf->cptzoomzoom == 1)
+		ft_calibration(fdf, 0, 0, 0);
 		ft_calibration_dezoom(fdf);
+		ft_invcalibration(fdf, 0, 0, 0);
+		fdf->cptzoomzoom = 0;
+	}
+	if (keycode == 53)
+		exit(0);
 	ft_draw(&fdf->data, fdf);
+	if (keycode == 85 || keycode == 83)
+		ft_set_invdata(fdf);
 	mlx_put_image_to_window(fdf->vars.mlx, fdf->vars.win, fdf->data.img, 0, 0);
 	return (0);
 }
@@ -73,6 +98,7 @@ int	main(int argc, char **argv)
 	// mlx_destroy_image(mlx_ptr_t *mlx_ptr, mlx_img_list_t *img_todel);
 	mlx_key_hook(fdf.vars.win, key_hook, &fdf);
 	ft_draw(&(fdf.data), &fdf);
+	ft_set_invdata(&fdf);
 	mlx_put_image_to_window(fdf.vars.mlx, fdf.vars.win, fdf.data.img, 0, 0);
 	mlx_loop(fdf.vars.mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:40:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/04 16:48:09 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/05 17:11:28 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,12 @@ typedef struct s_fdf
 	float		latmax;
 	int			rotx;
 	int			roty;
+	float		cptzoom;
+	int			cptzoomzoom;
+	float		cptdezoom;
+	int			dist;
+	int			posx;
+	int			posy;
 }	t_fdf;
 
 int		ft_parsing(int argc, char **argv, t_fdf *fdf);
@@ -113,8 +119,13 @@ void	ft_move_up(t_fdf *fdf);
 void	ft_move_down(t_fdf *fdf);
 void	ft_move_left(t_fdf *fdf);
 void	ft_set_data(t_fdf *fdf);
+int		ft_rgb(t_fdf *fdf);
+void	ft_calibration_mat(t_fdf *fdf, float ratio_x,
+			float ratio_y, float ratio);
+void	ft_set_invdata(t_fdf *fdf);
+void	ft_invcalibration(t_fdf *fdf, float ratio_x, float ratio_y, float ratio);
 
 # define BUFFER 100
-# define TETA 0.61540309
+# define TETA 0.20
 
 #endif

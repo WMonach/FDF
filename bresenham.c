@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 16:29:41 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/04 13:47:19 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/05 15:35:27 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	ft_bresenham(t_data *img, t_fdf *fdf, float max)
 		{
 			ft_rounded(fdf->temp.x1, fdf->temp.y1, fdf);
 			my_mlx_pixel_put(img, (int)fdf->temp.x1,
-				(int)fdf->temp.y1, 0x4876ff);
+				(int)fdf->temp.y1, ft_rgb(fdf));
 		}
 		i++;
 	}
