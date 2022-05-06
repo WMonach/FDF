@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:38:45 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/06 16:15:41 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/06 16:54:09 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	set_maps(t_fdf *fdf, int fd)
 			// printf("map[%d][%d].z=%f\n", i, j, fdf->map[i][j].z);
 			j++;
 		}
-		ft_rgb(fdf);
+		ft_fill_rgb(fdf);
 		free(line);
 		line = get_next_line(fd);
 	}

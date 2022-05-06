@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:40:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/06 16:14:47 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/06 16:59:11 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ typedef struct s_point
 	float	x;
 	float	y;
 	float	z;
+	int		colorx;
+	int		colory;
 	float	**data;
 }	t_point;
 
@@ -85,6 +87,7 @@ typedef struct s_fdf
 	float		dist;
 	float		distx;
 	float		disty;
+	float		distz;
 	float		posx;
 	float		posy;
 }	t_fdf;
@@ -121,6 +124,8 @@ float	ft_calculate_diffinv(float ratio_x, float ratio_y);
 void	ft_keyhook_translation(int keycode, t_fdf *fdf);
 void	ft_keyhook_zoom(int keycode, t_fdf *fdf);
 void	ft_keyhook_rotate(int keycode, t_fdf *fdf);
+int		ft_fill_rgb(t_fdf *fdf);
+int		ft_rgb(t_fdf *fdf, int i, int j);
 
 # define BUFFER 100
 
