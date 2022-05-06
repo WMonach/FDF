@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 10:46:40 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/05 16:45:36 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/06 12:32:18 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,68 +61,67 @@
 // 	}
 // }
 
-void	ft_calibration_zoom(t_fdf *fdf)
-{
-	int		i;
-	int		j;
+// void	ft_calibration_zoom(t_fdf *fdf)
+// {
+// 	int		i;
+// 	int		j;
 
-	i = -1;
-	fdf->cptzoom = 1.10;
-	while (++i < fdf->y_max)
-	{
-		j = -1;
-		while (++j < fdf->x_max)
-		{
-			fdf->map[i][j].x = fdf->map[i][j].x * fdf->cptzoom + (960 * (1 - fdf->cptzoom));
-			fdf->map[i][j].y = fdf->map[i][j].y * fdf->cptzoom + (540 * (1 - fdf->cptzoom));
-			// printf("map[%d][%d].x=%f\n", i, j, fdf->map[i][j].x);
-			// printf("map[%d][%d].y=%f\n", i, j, fdf->map[i][j].y);
-			// printf("map[%d][%d].z=%f\n", i, j, fdf->map[i][j].z);
-		}
-	}
-}
+// 	i = -1;
+// 	while (++i < fdf->y_max)
+// 	{
+// 		j = -1;
+// 		while (++j < fdf->x_max)
+// 		{
+// 			fdf->map[i][j].x = fdf->map[i][j].x * ratio + (960 * (1 - ratio));
+// 			fdf->map[i][j].y = fdf->map[i][j].y * fdf->cptzoom + (540 * (1 - fdf->cptzoom));
+// 			// printf("map[%d][%d].x=%f\n", i, j, fdf->map[i][j].x);
+// 			// printf("map[%d][%d].y=%f\n", i, j, fdf->map[i][j].y);
+// 			// printf("map[%d][%d].z=%f\n", i, j, fdf->map[i][j].z);
+// 		}
+// 	}
+// }
 
-void	ft_calibration_dezoom(t_fdf *fdf)
-{
-	int		i;
-	int		j;
+// void	ft_calibration_dezoom(t_fdf *fdf)
+// {
+// 	int		i;
+// 	int		j;
 
-	i = -1;
-	fdf->cptdezoom = 0.90;
-	while (++i < fdf->y_max)
-	{
-		j = -1;
-		while (++j < fdf->x_max)
-		{
-			fdf->map[i][j].x = fdf->map[i][j].x * fdf->cptdezoom + (960 * (1 - fdf->cptdezoom));
-			fdf->map[i][j].y = fdf->map[i][j].y * fdf->cptdezoom + (540 * (1 - fdf->cptdezoom));
-			// printf("map[%d][%d].x=%f\n", i, j, fdf->map[i][j].x);
-			// printf("map[%d][%d].y=%f\n", i, j, fdf->map[i][j].y);
-			// printf("map[%d][%d].z=%f\n", i, j, fdf->map[i][j].z);
-		}
-	}
-	ft_set_up_mat(fdf);
-}
+// 	i = -1;
+// 	fdf->cptdezoom = 0.90;
+// 	while (++i < fdf->y_max)
+// 	{
+// 		j = -1;
+// 		while (++j < fdf->x_max)
+// 		{
+// 			fdf->map[i][j].x = fdf->map[i][j].x * fdf->cptdezoom + (960 * (1 - fdf->cptdezoom));
+// 			fdf->map[i][j].y = fdf->map[i][j].y * fdf->cptdezoom + (540 * (1 - fdf->cptdezoom));
+// 			// printf("map[%d][%d].x=%f\n", i, j, fdf->map[i][j].x);
+// 			// printf("map[%d][%d].y=%f\n", i, j, fdf->map[i][j].y);
+// 			// printf("map[%d][%d].z=%f\n", i, j, fdf->map[i][j].z);
+// 		}
+// 	}
+// 	ft_set_up_mat(fdf);
+// }
 
-void	ft_set_up_mat(t_fdf *fdf)
-{
-	int	i;
-	int	j;
+// void	ft_set_up_mat(t_fdf *fdf)
+// {
+// 	int	i;
+// 	int	j;
 
-	i = 0;
-	while (i < fdf->y_max)
-	{
-		j = 0;
-		while (j < fdf->x_max)
-		{
-			if (fdf->map[i][j].x > fdf->x_mat)
-				fdf->x_mat = fdf->map[i][j].x;
-			if (fdf->map[i][j].y > fdf->y_mat)
-				fdf->y_mat = fdf->map[i][j].y;
-			if (fdf->map[i][j].z > fdf->z_max)
-				fdf->z_max = fdf->map[i][j].z;
-			j++;
-		}
-		i++;
-	}
-}
+// 	i = 0;
+// 	while (i < fdf->y_max)
+// 	{
+// 		j = 0;
+// 		while (j < fdf->x_max)
+// 		{
+// 			if (fdf->map[i][j].x > fdf->x_mat)
+// 				fdf->x_mat = fdf->map[i][j].x;
+// 			if (fdf->map[i][j].y > fdf->y_mat)
+// 				fdf->y_mat = fdf->map[i][j].y;
+// 			if (fdf->map[i][j].z > fdf->z_max)
+// 				fdf->z_max = fdf->map[i][j].z;
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// }

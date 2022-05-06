@@ -6,7 +6,7 @@
 #    By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 17:48:16 by wmonacho          #+#    #+#              #
-#    Updated: 2022/05/05 15:19:18 by wmonacho         ###   ########lyon.fr    #
+#    Updated: 2022/05/06 12:16:24 by wmonacho         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,12 +25,15 @@ OBJS_DIR = .objs
 
 OBJ =	$(addprefix $(OBJS_DIR)/, $(FILES:.c=.o))
 
-FILES = main.c								\
-		bresenham.c							\
-		debug.c								\
-		parsing.c							\
+FILES = main.c									\
+		bresenham.c								\
+		debug.c									\
+		parsing.c								\
 		zoom.c									\
 		rgb.c									\
+		calibration.c							\
+		keyhook.c								\
+		translation.c							\
 		../get_next_line/get_next_line.c		\
 		../get_next_line/get_next_line_utils.c	\
 		matrix.rotation.c						\

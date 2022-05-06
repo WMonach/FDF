@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:38:45 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/05 16:30:19 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/06 16:15:41 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,18 @@
 
 void	ft_fill_maps(t_fdf	*fdf, char *z_value, int i, int j)
 {
+	fdf->map[i][j].z = atoi(z_value);
 	fdf->map[i][j].x = j - ((fdf->x_max - 1) / 2);
 	fdf->map[i][j].y = i - ((fdf->y_max - 1) / 2);
-	fdf->map[i][j].z = atoi(z_value);
 	if (j == 0 && i == 0)
+	{
 		fdf->z_max = fdf->map[i][j].z;
+		fdf->z_min = fdf->map[i][j].z;
+	}
 	else if (fdf->map[i][j].z > fdf->z_max)
 		fdf->z_max = fdf->map[i][j].z;
+	else if (fdf->map[i][j].z < fdf->z_min)
+		fdf->z_min = fdf->map[i][j].z;
 }
 
 void	set_maps(t_fdf *fdf, int fd)
@@ -45,6 +50,7 @@ void	set_maps(t_fdf *fdf, int fd)
 			// printf("map[%d][%d].z=%f\n", i, j, fdf->map[i][j].z);
 			j++;
 		}
+		ft_rgb(fdf);
 		free(line);
 		line = get_next_line(fd);
 	}
@@ -82,11 +88,8 @@ int	ft_parsing(int size, char **argv, t_fdf *fdf)
 	char	*line;
 
 	line = NULL;
-	fdf->cptzoom = 1;
-	fdf->cptdezoom = 1;
-	fdf->cptzoomzoom = 1;
-	fdf->rotx = 1;
-	fdf->roty = 1;
+	fdf->posy = 540;
+	fdf->posx = 960;
 	if (size == 0)
 		return (0);
 	if (argv == NULL)
@@ -97,6 +100,9 @@ int	ft_parsing(int size, char **argv, t_fdf *fdf)
 	fd = open(argv[1], 0, O_RDONLY);
 	set_maps(fdf, fd);
 	close(fd);
+	fdf->distx = (1920) / (fdf->x_max) * 0.75;
+	fdf->disty = (1080) / (fdf->y_max) * 0.75;
+	fdf->dist = ft_calculate_diff(fdf->distx, fdf->disty);
 	return (1);
 }
 

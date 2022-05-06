@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 16:29:41 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/05 15:35:27 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/06 16:12:51 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	ft_rounded(float number1, float number2, t_fdf	*fdf)
 		fdf->temp.y1 = temp;
 	else
 		fdf->temp.y1 = rounded_down;
-
 }
 
 float	ft_max(float max1, float max2)
@@ -43,9 +42,9 @@ float	ft_max(float max1, float max2)
 	return (max1);
 }
 
-void	ft_bresenham(t_data *img, t_fdf *fdf, float max)
+void	ft_bresenham(t_data *img, t_fdf *fdf, int max)
 {
-	float	i;
+	int	i;
 
 	i = 0;
 	while (i < max)
@@ -57,7 +56,7 @@ void	ft_bresenham(t_data *img, t_fdf *fdf, float max)
 		{
 			ft_rounded(fdf->temp.x1, fdf->temp.y1, fdf);
 			my_mlx_pixel_put(img, (int)fdf->temp.x1,
-				(int)fdf->temp.y1, ft_rgb(fdf));
+				(int)fdf->temp.y1, 0xff00ff);
 		}
 		i++;
 	}
@@ -95,17 +94,17 @@ void	ft_formal_calculation(t_fdf *fdf, int i, int j, int mode)
 {
 	if (mode == 1)
 	{
-		fdf->pixel.x1 = fdf->map[i][j].x;
-		fdf->pixel.x2 = fdf->map[i][j + 1].x;
-		fdf->pixel.y2 = fdf->map[i][j + 1].y;
-		fdf->pixel.y1 = fdf->map[i][j].y;
+		fdf->pixel.x1 = fdf->dfault[i][j].x;
+		fdf->pixel.x2 = fdf->dfault[i][j + 1].x;
+		fdf->pixel.y2 = fdf->dfault[i][j + 1].y;
+		fdf->pixel.y1 = fdf->dfault[i][j].y;
 	}
 	if (mode == 2)
 	{
-		fdf->pixel.x1 = fdf->map[i][j].x;
-		fdf->pixel.x2 = fdf->map[i + 1][j].x;
-		fdf->pixel.y2 = fdf->map[i + 1][j].y;
-		fdf->pixel.y1 = fdf->map[i][j].y;
+		fdf->pixel.x1 = fdf->dfault[i][j].x;
+		fdf->pixel.x2 = fdf->dfault[i + 1][j].x;
+		fdf->pixel.y2 = fdf->dfault[i + 1][j].y;
+		fdf->pixel.y1 = fdf->dfault[i][j].y;
 		// printf("fdf->pixel.x1 =%f\n", fdf->pixel.x1);
 		// printf("fdf->pixel.x2 =%f\n", fdf->pixel.x2);
 		// printf("fdf->pixel.y2 = %f\n", fdf->pixel.y2);

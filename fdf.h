@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:40:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/05 17:11:28 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/06 16:14:47 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,19 +78,15 @@ typedef struct s_fdf
 	float		x_max;
 	float		y_max;
 	float		z_max;
+	float		z_min;
 	float		x_mat;
 	float		y_mat;
 	float		z_mat;
-	float		lgnmax;
-	float		latmax;
-	int			rotx;
-	int			roty;
-	float		cptzoom;
-	int			cptzoomzoom;
-	float		cptdezoom;
-	int			dist;
-	int			posx;
-	int			posy;
+	float		dist;
+	float		distx;
+	float		disty;
+	float		posx;
+	float		posy;
 }	t_fdf;
 
 int		ft_parsing(int argc, char **argv, t_fdf *fdf);
@@ -99,13 +95,12 @@ void	set_map(t_point **map);
 int		main(int argc, char **argv);
 void	ft_draw(t_data *img, t_fdf *fdf);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void	ft_matrix(t_fdf *fdf);
+void	ft_matrix(t_fdf *fdf, float teta, float delta);
 void	ft_zoom(t_fdf *fdf);
-void	ft_matrix_projection(t_fdf *fdf);
 float	ft_calculate_diff(float ratio_x, float ratio_y);
-void	ft_calibration(t_fdf *fdf, float ratio_x, float ratio_y, float ratio);
-void	ft_matrix_ry(t_fdf *fdf);
-void	ft_matrix_rx(t_fdf *fdf);
+void	ft_calibration(t_fdf *fdf);
+void	ft_matrix_ry(t_fdf *fdf, float delta);
+void	ft_matrix_rx(t_fdf *fdf, float teta);
 void	ft_matrix_rz(t_fdf *fdf);
 void	ft_formal_calculation(t_fdf *fdf, int i, int j, int mode);
 void	ft_rounded(float number1, float number2, t_fdf	*fdf);
@@ -120,12 +115,13 @@ void	ft_move_down(t_fdf *fdf);
 void	ft_move_left(t_fdf *fdf);
 void	ft_set_data(t_fdf *fdf);
 int		ft_rgb(t_fdf *fdf);
-void	ft_calibration_mat(t_fdf *fdf, float ratio_x,
-			float ratio_y, float ratio);
+void	ft_calibration_mat(t_fdf *fdf);
 void	ft_set_invdata(t_fdf *fdf);
-void	ft_invcalibration(t_fdf *fdf, float ratio_x, float ratio_y, float ratio);
+float	ft_calculate_diffinv(float ratio_x, float ratio_y);
+void	ft_keyhook_translation(int keycode, t_fdf *fdf);
+void	ft_keyhook_zoom(int keycode, t_fdf *fdf);
+void	ft_keyhook_rotate(int keycode, t_fdf *fdf);
 
 # define BUFFER 100
-# define TETA 0.20
 
 #endif
