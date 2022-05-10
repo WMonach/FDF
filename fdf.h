@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:40:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/10 13:53:50 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 14:07:51 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,9 @@ int		ft_gradiant(t_fdf *fdf, int colorx2);
 int		ft_green_to_blue(t_fdf *fdf);
 int		ft_red_to_green(t_fdf *fdf);
 int		ft_red_to_blue(t_fdf *fdf);
-
+int		ft_blue_to_red(t_fdf *fdf);
+int		ft_green_to_red(t_fdf *fdf);
+int		ft_blue_to_green(t_fdf *fdf);
 # define BUFFER 100
 
 #endif
