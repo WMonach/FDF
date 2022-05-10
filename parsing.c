@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:38:45 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/06 16:54:09 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 13:54:01 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ int	ft_parsing(int size, char **argv, t_fdf *fdf)
 	char	*line;
 
 	line = NULL;
+	fdf->pixel.a = 1;
+	fdf->pixel.b = 1;
 	fdf->posy = 540;
 	fdf->posx = 960;
 	if (size == 0)

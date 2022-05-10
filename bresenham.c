@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 16:29:41 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/06 16:12:51 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 13:54:09 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,51 +42,47 @@ float	ft_max(float max1, float max2)
 	return (max1);
 }
 
-void	ft_bresenham(t_data *img, t_fdf *fdf, int max)
+void	ft_bresenham(t_data *img, t_fdf *fdf, int colorx2)
 {
 	int	i;
 
 	i = 0;
-	while (i < max)
+	while (i < fdf->pixel.max)
 	{
-		fdf->temp.x1 = fdf->pixel.x1 + (fdf->pixel.dx * i / max);
-		fdf->temp.y1 = fdf->pixel.y1 + (fdf->pixel.dy * i / max);
+		fdf->temp.x1 = fdf->pixel.x1 + (fdf->pixel.dx * i / fdf->pixel.max);
+		fdf->temp.y1 = fdf->pixel.y1 + (fdf->pixel.dy * i / fdf->pixel.max);
 		if (fdf->temp.x1 < 1919 && fdf->temp.y1 < 1079
 			&& fdf->temp.x1 >= 0 && fdf->temp.y1 >= 0)
 		{
 			ft_rounded(fdf->temp.x1, fdf->temp.y1, fdf);
 			my_mlx_pixel_put(img, (int)fdf->temp.x1,
-				(int)fdf->temp.y1, 0xff00ff);
+				(int)fdf->temp.y1, ft_gradiant(fdf, colorx2));
 		}
 		i++;
 	}
+	fdf->pixel.a = 1;
+	fdf->pixel.b = 1;
 }
 
 void	ft_name(t_data *img, t_fdf *fdf, int i, int j)
 {
+	fdf->colorx = fdf->map[i][j].colorx;
 	if (j + 1 < fdf->x_max && i + 1 < fdf->y_max)
 	{
-		// printf("%dji%d\n", j, i);
 		ft_formal_calculation(fdf, i, j, 1);
-		ft_bresenham(img, fdf, fdf->pixel.max);
+		ft_bresenham(img, fdf, fdf->map[i][j + 1].colorx);
 		ft_formal_calculation(fdf, i, j, 2);
-		ft_bresenham(img, fdf, fdf->pixel.max);
+		ft_bresenham(img, fdf, fdf->map[i + 1][j].colorx);
 	}
 	if (j + 1 < fdf->x_max && i + 1 >= fdf->y_max)
 	{
-		// printf("%dj%di\n", j, i);
 		ft_formal_calculation(fdf, i, j, 1);
-		ft_bresenham(img, fdf, fdf->pixel.max);
+		ft_bresenham(img, fdf, fdf->map[i][j + 1].colorx);
 	}
 	if (i + 1 < fdf->y_max && j + 1 >= fdf->x_max)
 	{
-		// printf("%di%dj\n", i, j);
 		ft_formal_calculation(fdf, i, j, 2);
-		// printf("fdf->pixel.x1 =%f\n", fdf->pixel.x1);
-		// printf("fdf->pixel.x2 =%f\n", fdf->pixel.x2);
-		// printf("fdf->pixel.y2 = %f\n", fdf->pixel.y2);
-		// printf("fdf->pixel.y1 = %f\n", fdf->pixel.y1);
-		ft_bresenham(img, fdf, fdf->pixel.max);
+		ft_bresenham(img, fdf, fdf->map[i + 1][j].colorx);
 	}
 }
 

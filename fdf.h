@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:40:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/06 16:59:11 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 13:53:50 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ typedef struct s_pixel
 	float	ex;
 	float	ey;
 	float	max;
+	int		a;
+	int		b;
 }				t_pixel;
 
 typedef struct s_vars
@@ -90,6 +92,8 @@ typedef struct s_fdf
 	float		distz;
 	float		posx;
 	float		posy;
+	int			colorx;
+	int			colorx2;
 }	t_fdf;
 
 int		ft_parsing(int argc, char **argv, t_fdf *fdf);
@@ -117,15 +121,18 @@ void	ft_move_up(t_fdf *fdf);
 void	ft_move_down(t_fdf *fdf);
 void	ft_move_left(t_fdf *fdf);
 void	ft_set_data(t_fdf *fdf);
-int		ft_rgb(t_fdf *fdf);
 void	ft_calibration_mat(t_fdf *fdf);
 void	ft_set_invdata(t_fdf *fdf);
 float	ft_calculate_diffinv(float ratio_x, float ratio_y);
 void	ft_keyhook_translation(int keycode, t_fdf *fdf);
 void	ft_keyhook_zoom(int keycode, t_fdf *fdf);
 void	ft_keyhook_rotate(int keycode, t_fdf *fdf);
-int		ft_fill_rgb(t_fdf *fdf);
-int		ft_rgb(t_fdf *fdf, int i, int j);
+void	ft_rgb(t_fdf *fdf, int i, int j);
+void	ft_fill_rgb(t_fdf *fdf);
+int		ft_gradiant(t_fdf *fdf, int colorx2);
+int		ft_green_to_blue(t_fdf *fdf);
+int		ft_red_to_green(t_fdf *fdf);
+int		ft_red_to_blue(t_fdf *fdf);
 
 # define BUFFER 100
 
