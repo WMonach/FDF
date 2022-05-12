@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 16:49:11 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/06 14:10:14 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/12 14:17:01 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 int	key_hook(int keycode, t_fdf *fdf)
 {
-	printf("Hello from key_hook!, %d\n", keycode);
 	mlx_destroy_image(fdf->vars.mlx, fdf->data.img);
 	fdf->data.img = mlx_new_image(fdf->vars.mlx, 1920, 1080);
 	fdf->data.addr = mlx_get_data_addr(fdf->data.img, &fdf->data.bits_per_pixel, &fdf->data.line_length,
@@ -34,7 +33,10 @@ int	key_hook(int keycode, t_fdf *fdf)
 	ft_keyhook_zoom(keycode, fdf);
 	ft_keyhook_rotate(keycode, fdf);
 	if (keycode == 53)
+	{
+		ft_free_all(fdf);
 		exit(0);
+	}
 	ft_draw(&fdf->data, fdf);
 	mlx_put_image_to_window(fdf->vars.mlx, fdf->vars.win, fdf->data.img, 0, 0);
 	return (0);
@@ -59,4 +61,20 @@ int	main(int argc, char **argv)
 	ft_draw(&(fdf.data), &fdf);
 	mlx_put_image_to_window(fdf.vars.mlx, fdf.vars.win, fdf.data.img, 0, 0);
 	mlx_loop(fdf.vars.mlx);
+	ft_free_all(&fdf);
+}
+
+void	ft_free_all(t_fdf *fdf)
+{
+	int	i;
+
+	i = -1;
+	while (++i < fdf->y_max)
+		free(fdf->map[i]);
+	free(fdf->map);
+	i = -1;
+	while (++i < fdf->y_max)
+		free(fdf->dfault[i]);
+	free(fdf->dfault);
+	free(fdf);
 }

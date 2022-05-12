@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:38:45 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/10 13:54:01 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/12 16:35:29 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	set_maps(t_fdf *fdf, int fd)
 		free(line);
 		line = get_next_line(fd);
 	}
+	free(line);
+	free(tab);
 }
 
 void	ft_malloc_maps(t_fdf *fdf, char *line, int fd)
@@ -77,8 +79,15 @@ void	ft_malloc_maps(t_fdf *fdf, char *line, int fd)
 		fdf->y_max++;
 	}
 	fdf->map = (t_point **)malloc(sizeof(t_point *) * (fdf->y_max));
+	if (fdf->map == NULL)
+		exit (0);
 	while (i < fdf->y_max)
 		fdf->map[i++] = (t_point *)malloc(sizeof(t_point) * (fdf->x_max));
+	if (fdf->map == NULL)
+	{
+		free(fdf->map);
+		exit (0);
+	}
 	free(line);
 }
 
@@ -90,6 +99,7 @@ int	ft_parsing(int size, char **argv, t_fdf *fdf)
 	line = NULL;
 	fdf->pixel.a = 1;
 	fdf->pixel.b = 1;
+	fdf->start = 0;
 	fdf->posy = 540;
 	fdf->posx = 960;
 	if (size == 0)

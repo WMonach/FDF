@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 16:29:41 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/10 13:54:09 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/12 13:30:00 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ float	ft_max(float max1, float max2)
 	return (max1);
 }
 
-void	ft_bresenham(t_data *img, t_fdf *fdf, int colorx2)
+void	ft_bresenham(t_data *img, t_fdf *fdf)
 {
 	int	i;
 
@@ -56,12 +56,10 @@ void	ft_bresenham(t_data *img, t_fdf *fdf, int colorx2)
 		{
 			ft_rounded(fdf->temp.x1, fdf->temp.y1, fdf);
 			my_mlx_pixel_put(img, (int)fdf->temp.x1,
-				(int)fdf->temp.y1, ft_gradiant(fdf, colorx2));
+				(int)fdf->temp.y1, fdf->colorx);
 		}
 		i++;
 	}
-	fdf->pixel.a = 1;
-	fdf->pixel.b = 1;
 }
 
 void	ft_name(t_data *img, t_fdf *fdf, int i, int j)
@@ -70,19 +68,19 @@ void	ft_name(t_data *img, t_fdf *fdf, int i, int j)
 	if (j + 1 < fdf->x_max && i + 1 < fdf->y_max)
 	{
 		ft_formal_calculation(fdf, i, j, 1);
-		ft_bresenham(img, fdf, fdf->map[i][j + 1].colorx);
+		ft_bresenham(img, fdf);
 		ft_formal_calculation(fdf, i, j, 2);
-		ft_bresenham(img, fdf, fdf->map[i + 1][j].colorx);
+		ft_bresenham(img, fdf);
 	}
 	if (j + 1 < fdf->x_max && i + 1 >= fdf->y_max)
 	{
 		ft_formal_calculation(fdf, i, j, 1);
-		ft_bresenham(img, fdf, fdf->map[i][j + 1].colorx);
+		ft_bresenham(img, fdf);
 	}
 	if (i + 1 < fdf->y_max && j + 1 >= fdf->x_max)
 	{
 		ft_formal_calculation(fdf, i, j, 2);
-		ft_bresenham(img, fdf, fdf->map[i + 1][j].colorx);
+		ft_bresenham(img, fdf);
 	}
 }
 

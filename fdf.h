@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:40:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/10 14:07:51 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/12 13:50:17 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_point
 	float	z;
 	int		colorx;
 	int		colory;
-	float	**data;
+	//float	**data;
 }	t_point;
 
 typedef struct s_data
@@ -93,7 +93,9 @@ typedef struct s_fdf
 	float		posx;
 	float		posy;
 	int			colorx;
+	int			colorxtemp;
 	int			colorx2;
+	int			start;
 }	t_fdf;
 
 int		ft_parsing(int argc, char **argv, t_fdf *fdf);
@@ -136,6 +138,7 @@ int		ft_red_to_blue(t_fdf *fdf);
 int		ft_blue_to_red(t_fdf *fdf);
 int		ft_green_to_red(t_fdf *fdf);
 int		ft_blue_to_green(t_fdf *fdf);
+void	ft_free_all(t_fdf *fdf);
 # define BUFFER 100
 
 #endif

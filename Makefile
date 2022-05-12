@@ -6,7 +6,7 @@
 #    By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 17:48:16 by wmonacho          #+#    #+#              #
-#    Updated: 2022/05/06 12:16:24 by wmonacho         ###   ########lyon.fr    #
+#    Updated: 2022/05/12 13:30:58 by wmonacho         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ libs:
 	$(MAKE) -C $(LIBSDIR)
 
 $(NAME): $(OBJ) $(LIBSDIR)libft.a
-	$(CC) $(SFLAGS) $(OBJ) $(LIBSDIR)libft.a -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	$(CC) $(SFLAG) $(OBJ) $(LIBSDIR)libft.a -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 	
 $(OBJS_DIR)/%.o:		%.c fdf.h ${LIBSDIR}libft.h ${LIBSDIR}libft.a Makefile
 				mkdir -p $(dir $@)
