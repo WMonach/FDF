@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 10:53:17 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/06 12:16:07 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/17 16:01:20 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,6 @@ void	ft_matrix_rx(t_fdf *fdf, float teta)
 			save.z = fdf->map[i][j].z;
 			fdf->map[i][j].y = save.y * cos(teta) - save.z * sin(teta);
 			fdf->map[i][j].z = save.y * sin(teta) + save.z * cos(teta);
-			// printf("map[%d][%d].x=%f\n", i, j, fdf->map[i][j].x);
-			// printf("map[%d][%d].y=%f\n", i, j, fdf->map[i][j].y);
-			// printf("map[%d][%d].z=%f\n", i, j, fdf->map[i][j].z);
-			/**/
 			j++;
 		}
 		i++;

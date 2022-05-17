@@ -6,7 +6,7 @@
 #    By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 17:48:16 by wmonacho          #+#    #+#              #
-#    Updated: 2022/05/12 13:30:58 by wmonacho         ###   ########lyon.fr    #
+#    Updated: 2022/05/17 15:54:40 by wmonacho         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,9 +27,7 @@ OBJ =	$(addprefix $(OBJS_DIR)/, $(FILES:.c=.o))
 
 FILES = main.c									\
 		bresenham.c								\
-		debug.c									\
 		parsing.c								\
-		zoom.c									\
 		rgb.c									\
 		calibration.c							\
 		keyhook.c								\

@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 16:29:41 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/12 13:30:00 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/17 16:03:31 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,6 @@ void	ft_rounded(float number1, float number2, t_fdf	*fdf)
 		fdf->temp.y1 = temp;
 	else
 		fdf->temp.y1 = rounded_down;
-}
-
-float	ft_max(float max1, float max2)
-{
-	if (max1 > max2)
-		return (max1);
-	if (max1 < max2)
-		return (max2);
-	return (max1);
 }
 
 void	ft_bresenham(t_data *img, t_fdf *fdf)
@@ -99,10 +90,6 @@ void	ft_formal_calculation(t_fdf *fdf, int i, int j, int mode)
 		fdf->pixel.x2 = fdf->dfault[i + 1][j].x;
 		fdf->pixel.y2 = fdf->dfault[i + 1][j].y;
 		fdf->pixel.y1 = fdf->dfault[i][j].y;
-		// printf("fdf->pixel.x1 =%f\n", fdf->pixel.x1);
-		// printf("fdf->pixel.x2 =%f\n", fdf->pixel.x2);
-		// printf("fdf->pixel.y2 = %f\n", fdf->pixel.y2);
-		// printf("fdf->pixel.y1 = %f\n", fdf->pixel.y1);
 	}
 	fdf->pixel.dx = (fdf->pixel.x2 - fdf->pixel.x1);
 	fdf->pixel.dy = (fdf->pixel.y2 - fdf->pixel.y1);

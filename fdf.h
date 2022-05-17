@@ -6,14 +6,13 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:40:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/12 13:50:17 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/17 16:03:50 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# include <stdio.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdlib.h>
@@ -38,7 +37,6 @@ typedef struct s_point
 	float	z;
 	int		colorx;
 	int		colory;
-	//float	**data;
 }	t_point;
 
 typedef struct s_data
@@ -105,7 +103,6 @@ int		main(int argc, char **argv);
 void	ft_draw(t_data *img, t_fdf *fdf);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	ft_matrix(t_fdf *fdf, float teta, float delta);
-void	ft_zoom(t_fdf *fdf);
 float	ft_calculate_diff(float ratio_x, float ratio_y);
 void	ft_calibration(t_fdf *fdf);
 void	ft_matrix_ry(t_fdf *fdf, float delta);
@@ -139,6 +136,7 @@ int		ft_blue_to_red(t_fdf *fdf);
 int		ft_green_to_red(t_fdf *fdf);
 int		ft_blue_to_green(t_fdf *fdf);
 void	ft_free_all(t_fdf *fdf);
+float	ft_max(float max1, float max2);
 # define BUFFER 100
 
 #endif

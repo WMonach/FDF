@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 16:49:11 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/12 14:17:01 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/17 16:01:36 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	key_hook(int keycode, t_fdf *fdf)
 {
 	mlx_destroy_image(fdf->vars.mlx, fdf->data.img);
 	fdf->data.img = mlx_new_image(fdf->vars.mlx, 1920, 1080);
-	fdf->data.addr = mlx_get_data_addr(fdf->data.img, &fdf->data.bits_per_pixel, &fdf->data.line_length,
+	fdf->data.addr = mlx_get_data_addr(fdf->data.img,
+			&fdf->data.bits_per_pixel, &fdf->data.line_length,
 			&fdf->data.endian);
 	ft_keyhook_translation(keycode, fdf);
 	ft_keyhook_zoom(keycode, fdf);
@@ -51,12 +52,12 @@ int	main(int argc, char **argv)
 	vars.win = mlx_new_window(vars.mlx, 1920, 1080, "Hello world!");
 	fdf.vars = vars;
 	fdf.data.img = mlx_new_image(vars.mlx, 1920, 1080);
-	fdf.data.addr = mlx_get_data_addr(fdf.data.img, &fdf.data.bits_per_pixel, &fdf.data.line_length,
+	fdf.data.addr = mlx_get_data_addr(fdf.data.img,
+			&fdf.data.bits_per_pixel, &fdf.data.line_length,
 			&fdf.data.endian);
 	ft_parsing(argc, argv, &fdf);
 	ft_calibrate_z(&fdf);
 	ft_matrix(&fdf, 0.61, 0.61);
-	// mlx_destroy_image(mlx_ptr_t *mlx_ptr, mlx_img_list_t *img_todel);
 	mlx_key_hook(fdf.vars.win, key_hook, &fdf);
 	ft_draw(&(fdf.data), &fdf);
 	mlx_put_image_to_window(fdf.vars.mlx, fdf.vars.win, fdf.data.img, 0, 0);

@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:38:45 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/12 16:35:29 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/17 16:20:19 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,6 @@ void	set_maps(t_fdf *fdf, int fd)
 		while (line != NULL && tab[j])
 		{
 			ft_fill_maps(fdf, tab[j], i, j);
-			// printf("map[%d][%d].x=%f\n", i, j, fdf->map[i][j].x);
-			// printf("map[%d][%d].y=%f\n", i, j, fdf->map[i][j].y);
-			// printf("map[%d][%d].z=%f\n", i, j, fdf->map[i][j].z);
 			j++;
 		}
 		ft_fill_rgb(fdf);
@@ -55,22 +52,25 @@ void	set_maps(t_fdf *fdf, int fd)
 		line = get_next_line(fd);
 	}
 	free(line);
-	free(tab);
+	j = 0;
+	while (tab[j] != '\0')
+		free(tab[j++]);
 }
 
 void	ft_malloc_maps(t_fdf *fdf, char *line, int fd)
 {
 	int			i;
 	char		**tab;
+	char		*liine;
 
 	i = 0;
 	line = get_next_line(fd);
-	line = ft_strtrim(line, "\n");
-	tab = ft_split(line, ' ');
+	liine = ft_strtrim(line, "\n");
+	tab = ft_split(liine, ' ');
+	free(liine);
 	while (tab[i] != NULL)
 		i++;
 	fdf->x_max = i;
-	i = 0;
 	fdf->y_max = 0;
 	while (line != NULL)
 	{
@@ -78,26 +78,32 @@ void	ft_malloc_maps(t_fdf *fdf, char *line, int fd)
 		line = get_next_line(fd);
 		fdf->y_max++;
 	}
+	free(line);
+	i = 0;
+	while (tab[i] != '\0')
+		free(tab[i++]);
 	fdf->map = (t_point **)malloc(sizeof(t_point *) * (fdf->y_max));
 	if (fdf->map == NULL)
-		exit (0);
-	while (i < fdf->y_max)
-		fdf->map[i++] = (t_point *)malloc(sizeof(t_point) * (fdf->x_max));
-	if (fdf->map == NULL)
 	{
+		free(fdf->dfault);
 		free(fdf->map);
 		exit (0);
 	}
-	free(line);
+	i = 0;
+	while (i < fdf->y_max)
+		fdf->map[i++] = (t_point *)malloc(sizeof(t_point) * (fdf->x_max));
+	if (fdf->map == NULL)
+		ft_free_all(fdf);
 }
 
 int	ft_parsing(int size, char **argv, t_fdf *fdf)
 {
 	int		fd;
 	char	*line;
+	int		i;
 
 	line = NULL;
-	fdf->pixel.a = 1;
+	i = 0;
 	fdf->pixel.b = 1;
 	fdf->start = 0;
 	fdf->posy = 540;
@@ -106,6 +112,12 @@ int	ft_parsing(int size, char **argv, t_fdf *fdf)
 		return (0);
 	if (argv == NULL)
 		return (0);
+	if (argv[1] == NULL)
+		exit(0);
+	fd = open(argv[1], 0, O_RDONLY);
+	if (read(fd, line, sizeof(char) * BUFFER_SIZE) < 0)
+		// exit (0);
+	close(fd);
 	fd = open(argv[1], 0, O_RDONLY);
 	ft_malloc_maps(fdf, line, fd);
 	close(fd);
