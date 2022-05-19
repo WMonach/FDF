@@ -6,7 +6,7 @@
 #    By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 17:48:16 by wmonacho          #+#    #+#              #
-#    Updated: 2022/05/17 15:54:40 by wmonacho         ###   ########lyon.fr    #
+#    Updated: 2022/05/19 15:51:02 by wmonacho         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,6 @@ FILES = main.c									\
 		rgb.c									\
 		calibration.c							\
 		keyhook.c								\
-		translation.c							\
 		../get_next_line/get_next_line.c		\
 		../get_next_line/get_next_line_utils.c	\
 		matrix.rotation.c						\

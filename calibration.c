@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:48:28 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/17 16:03:39 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/19 11:52:06 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,7 @@ float	ft_calculate_diffinv(float ratio_x, float ratio_y)
 	{
 		return (ratio_x);
 	}
-	if (ratio_x <= ratio_y)
-	{
-		return (ratio_y);
-	}
-	return (1);
+	return (ratio_y);
 }
 
 float	ft_calculate_diff(float ratio_x, float ratio_y)
@@ -81,18 +77,12 @@ float	ft_calculate_diff(float ratio_x, float ratio_y)
 	{
 		return (ratio_y);
 	}
-	if (ratio_x <= ratio_y)
-	{
-		return (ratio_x);
-	}
-	return (1);
+	return (ratio_x);
 }
 
 float	ft_max(float max1, float max2)
 {
 	if (max1 > max2)
 		return (max1);
-	if (max1 < max2)
-		return (max2);
-	return (max1);
+	return (max2);
 }

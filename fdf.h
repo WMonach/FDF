@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:40:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/17 16:03:50 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/19 14:12:54 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FDF_H
 
 # include <unistd.h>
+# include <stdio.h>
 # include <fcntl.h>
 # include <stdlib.h>
 # include <string.h>
@@ -137,6 +138,9 @@ int		ft_green_to_red(t_fdf *fdf);
 int		ft_blue_to_green(t_fdf *fdf);
 void	ft_free_all(t_fdf *fdf);
 float	ft_max(float max1, float max2);
+void	ft_free_map(t_fdf *fdf);
+int		ft_free_line(char *line);
+int		ft_destroy_image(t_fdf *fdf);
 # define BUFFER 100
 
 #endif

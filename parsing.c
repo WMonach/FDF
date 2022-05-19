@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:38:45 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/17 16:20:19 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/19 16:17:56 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,34 +34,37 @@ void	set_maps(t_fdf *fdf, int fd)
 	int		j;
 	char	*line;
 	char	**tab;
+	char	*liine;
 
 	i = -1;
 	line = get_next_line(fd);
 	while (++i < fdf->y_max && line != NULL)
 	{
 		j = 0;
-		line = ft_strtrim(line, "\n");
-		tab = ft_split(line, ' ');
-		while (line != NULL && tab[j])
+		liine = ft_strtrim(line, "\n");
+		free (line);
+		tab = ft_split(liine, ' ');
+		while (liine != NULL && tab[j])
 		{
 			ft_fill_maps(fdf, tab[j], i, j);
 			j++;
 		}
 		ft_fill_rgb(fdf);
-		free(line);
+		free(liine);
+		j = 0;
 		line = get_next_line(fd);
+		while (tab[j] != 0)
+			free(tab[j++]);
+		free(tab);
 	}
 	free(line);
-	j = 0;
-	while (tab[j] != '\0')
-		free(tab[j++]);
 }
 
 void	ft_malloc_maps(t_fdf *fdf, char *line, int fd)
 {
-	int			i;
-	char		**tab;
-	char		*liine;
+	int		i;
+	char	**tab;
+	char	*liine;
 
 	i = 0;
 	line = get_next_line(fd);
@@ -82,42 +85,27 @@ void	ft_malloc_maps(t_fdf *fdf, char *line, int fd)
 	i = 0;
 	while (tab[i] != '\0')
 		free(tab[i++]);
+	free(tab);
 	fdf->map = (t_point **)malloc(sizeof(t_point *) * (fdf->y_max));
 	if (fdf->map == NULL)
-	{
-		free(fdf->dfault);
-		free(fdf->map);
 		exit (0);
-	}
 	i = 0;
 	while (i < fdf->y_max)
 		fdf->map[i++] = (t_point *)malloc(sizeof(t_point) * (fdf->x_max));
 	if (fdf->map == NULL)
-		ft_free_all(fdf);
+		ft_free_map(fdf);
 }
 
 int	ft_parsing(int size, char **argv, t_fdf *fdf)
 {
 	int		fd;
 	char	*line;
-	int		i;
 
-	line = NULL;
-	i = 0;
-	fdf->pixel.b = 1;
-	fdf->start = 0;
+	line = malloc(sizeof(char) * 1);
 	fdf->posy = 540;
 	fdf->posx = 960;
 	if (size == 0)
 		return (0);
-	if (argv == NULL)
-		return (0);
-	if (argv[1] == NULL)
-		exit(0);
-	fd = open(argv[1], 0, O_RDONLY);
-	if (read(fd, line, sizeof(char) * BUFFER_SIZE) < 0)
-		// exit (0);
-	close(fd);
 	fd = open(argv[1], 0, O_RDONLY);
 	ft_malloc_maps(fdf, line, fd);
 	close(fd);
@@ -129,7 +117,3 @@ int	ft_parsing(int size, char **argv, t_fdf *fdf)
 	fdf->dist = ft_calculate_diff(fdf->distx, fdf->disty);
 	return (1);
 }
-
-/*
-alors je dois remplir mon double tableau avec x y z
-*/

@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 16:49:11 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/17 16:01:36 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/19 16:17:29 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	key_hook(int keycode, t_fdf *fdf)
 	if (keycode == 53)
 	{
 		ft_free_all(fdf);
-		exit(0);
+		exit (0);
 	}
 	ft_draw(&fdf->data, fdf);
 	mlx_put_image_to_window(fdf->vars.mlx, fdf->vars.win, fdf->data.img, 0, 0);
@@ -45,24 +45,35 @@ int	key_hook(int keycode, t_fdf *fdf)
 
 int	main(int argc, char **argv)
 {
-	t_fdf	fdf;
-	t_vars	vars;
+	t_fdf	*fdf;
+	int		fd;
+	char	*line;
+	int		i;
 
-	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, 1920, 1080, "Hello world!");
-	fdf.vars = vars;
-	fdf.data.img = mlx_new_image(vars.mlx, 1920, 1080);
-	fdf.data.addr = mlx_get_data_addr(fdf.data.img,
-			&fdf.data.bits_per_pixel, &fdf.data.line_length,
-			&fdf.data.endian);
-	ft_parsing(argc, argv, &fdf);
-	ft_calibrate_z(&fdf);
-	ft_matrix(&fdf, 0.61, 0.61);
-	mlx_key_hook(fdf.vars.win, key_hook, &fdf);
-	ft_draw(&(fdf.data), &fdf);
-	mlx_put_image_to_window(fdf.vars.mlx, fdf.vars.win, fdf.data.img, 0, 0);
-	mlx_loop(fdf.vars.mlx);
-	ft_free_all(&fdf);
+	i = 0;
+	line = malloc(sizeof(char) * 1);
+	fd = open(argv[1], 0, O_RDONLY);
+	i = read(fd, line, sizeof(char) * 1);
+	close(fd);
+	free(line);
+	if (i < 0)
+		return (1);
+	fdf = malloc(sizeof(t_fdf));
+	fdf->vars.mlx = mlx_init();
+	fdf->vars.win = mlx_new_window(fdf->vars.mlx, 1920, 1080, "Viens ici que j'te bute enculé!");
+	fdf->data.img = mlx_new_image(fdf->vars.mlx, 1920, 1080);
+	fdf->data.addr = mlx_get_data_addr((fdf->data.img),
+			&(fdf->data.bits_per_pixel), &(fdf->data.line_length),
+			&(fdf->data.endian));
+	if (ft_parsing(argc, argv, fdf) == 0)
+		return (ft_destroy_image(fdf));
+	ft_calibrate_z(fdf);
+	ft_matrix(fdf, 0.61, 0.61);
+	mlx_key_hook(fdf->vars.win, key_hook, fdf);
+	ft_draw(&(fdf->data), fdf);
+	mlx_put_image_to_window(fdf->vars.mlx, fdf->vars.win, fdf->data.img, 0, 0);
+	mlx_loop(fdf->vars.mlx);
+	ft_free_all(fdf);
 }
 
 void	ft_free_all(t_fdf *fdf)
@@ -77,5 +88,31 @@ void	ft_free_all(t_fdf *fdf)
 	while (++i < fdf->y_max)
 		free(fdf->dfault[i]);
 	free(fdf->dfault);
+	mlx_destroy_image(fdf->vars.mlx, fdf->data.img);
+	mlx_destroy_window(fdf->vars.mlx, fdf->vars.win);
 	free(fdf);
+	exit (0);
+}
+
+void	ft_free_map(t_fdf *fdf)
+{
+	int	i;
+
+	i = -1;
+	while (++i < fdf->y_max)
+		free(fdf->map[i]);
+	free(fdf->map);
+	free(fdf);
+	exit (0);
+}
+
+int	ft_destroy_image(t_fdf *fdf)
+{
+	fdf->y_mat += 0;
+	printf("%p\n", fdf->vars.win);
+	mlx_destroy_image((fdf->vars.mlx), (fdf->data.img));
+	mlx_destroy_window((fdf->vars.mlx), (fdf->vars.win));
+	free(fdf->vars.mlx);
+	free(fdf);
+	return (1);
 }
