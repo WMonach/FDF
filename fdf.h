@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:40:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/24 12:34:54 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/24 15:18:33 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ int		ft_free_line(char *line);
 int		ft_destroy_image(t_fdf *fdf);
 void	ft_malloc_mapsbis(t_fdf *fdf);
 void	ft_malloc_dfault(t_fdf *fdf);
-void	ft_malloc_maps(t_fdf *fdf, char *line, int fd);
+void	ft_malloc_maps(t_fdf *fdf, int fd);
 int		ft_check_read(char **argv);
 # define BUFFER 100
 

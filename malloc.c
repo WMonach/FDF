@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 11:59:18 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/24 12:00:12 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/24 16:19:30 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_malloc_mapsbis(t_fdf *fdf)
 
 	fdf->map = (t_point **)malloc(sizeof(t_point *) * (fdf->y_max));
 	if (fdf->map == NULL)
-		exit (0);
+		ft_free_map(fdf);
 	i = 0;
 	while (i < fdf->y_max)
 		fdf->map[i++] = (t_point *)malloc(sizeof(t_point) * (fdf->x_max));
@@ -41,10 +41,11 @@ void	ft_malloc_mapsbis(t_fdf *fdf)
 		ft_free_map(fdf);
 }
 
-void	ft_malloc_maps(t_fdf *fdf, char *line, int fd)
+void	ft_malloc_maps(t_fdf *fdf, int fd)
 {
 	int		i;
 	char	**tab;
+	char	*line;
 	char	*trim;
 
 	i = 0;
