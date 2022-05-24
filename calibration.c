@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:48:28 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/19 11:52:06 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/24 12:02:39 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,7 @@ void	ft_calibrate_z(t_fdf *fdf)
 			}
 		}
 	}
-	i = 0;
-	fdf->dfault = (t_default **)malloc(sizeof(t_default *) * (fdf->y_max));
-	while (i < fdf->y_max)
-		fdf->dfault[i++] = (t_default *)malloc(sizeof(t_default)
-				* (fdf->x_max));
+	ft_malloc_dfault(fdf);
 }
 
 float	ft_calculate_diffinv(float ratio_x, float ratio_y)

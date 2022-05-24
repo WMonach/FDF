@@ -6,14 +6,12 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 16:49:11 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/19 16:24:48 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/24 14:23:07 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx/mlx.h"
 #include "fdf.h"
-
-
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -46,18 +44,18 @@ int	key_hook(int keycode, t_fdf *fdf)
 int	main(int argc, char **argv)
 {
 	t_fdf	*fdf;
-	int		fd;
-	char	*line;
-	int		i;
+	// int		fd;
+	// char	*line;
+	// int		i;
 
-	i = 0;
-	line = malloc(sizeof(char) * 1);
-	fd = open(argv[1], 0, O_RDONLY);
-	i = read(fd, line, sizeof(char) * 1);
-	close(fd);
-	free(line);
-	if (i < 0)
-		return (1);
+	// i = 0;
+	// line = malloc(sizeof(char) * 1);
+	// fd = open(argv[1], 0, O_RDONLY);
+	// i = read(fd, line, sizeof(char) * 1);
+	// close(fd);
+	// free(line);
+	// if (i < 0)
+	// 	return (1);
 	fdf = malloc(sizeof(t_fdf));
 	if (ft_parsing(argc, argv, fdf) == 0)
 	{
@@ -65,7 +63,8 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	fdf->vars.mlx = mlx_init();
-	fdf->vars.win = mlx_new_window(fdf->vars.mlx, 1920, 1080, "Viens ici que j'te bute enculé!");
+	fdf->vars.win = mlx_new_window(fdf->vars.mlx,
+			1920, 1080, "FDF");
 	fdf->data.img = mlx_new_image(fdf->vars.mlx, 1920, 1080);
 	fdf->data.addr = mlx_get_data_addr((fdf->data.img),
 			&(fdf->data.bits_per_pixel), &(fdf->data.line_length),
@@ -84,7 +83,7 @@ void	ft_free_all(t_fdf *fdf)
 	int	i;
 
 	i = -1;
-	printf("%p\n", fdf->vars.win);
+	printf("%p\n", fdf->vars.mlx);
 	while (++i < fdf->y_max)
 		free(fdf->map[i]);
 	free(fdf->map);
@@ -106,6 +105,9 @@ void	ft_free_map(t_fdf *fdf)
 	while (++i < fdf->y_max)
 		free(fdf->map[i]);
 	free(fdf->map);
+	mlx_destroy_image((fdf->vars.mlx), (fdf->data.img));
+	mlx_destroy_window((fdf->vars.mlx), (fdf->vars.win));
+	free(fdf->vars.mlx);
 	free(fdf);
 	exit (0);
 }
@@ -113,7 +115,6 @@ void	ft_free_map(t_fdf *fdf)
 int	ft_destroy_image(t_fdf *fdf)
 {
 	fdf->y_mat += 0;
-	printf("%p\n", fdf->vars.win);
 	mlx_destroy_image((fdf->vars.mlx), (fdf->data.img));
 	mlx_destroy_window((fdf->vars.mlx), (fdf->vars.win));
 	free(fdf->vars.mlx);

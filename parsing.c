@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:38:45 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/19 16:17:56 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/24 12:02:09 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,23 @@ void	set_maps(t_fdf *fdf, int fd)
 	int		j;
 	char	*line;
 	char	**tab;
-	char	*liine;
+	char	*trim;
 
 	i = -1;
 	line = get_next_line(fd);
 	while (++i < fdf->y_max && line != NULL)
 	{
 		j = 0;
-		liine = ft_strtrim(line, "\n");
+		trim = ft_strtrim(line, "\n");
 		free (line);
-		tab = ft_split(liine, ' ');
-		while (liine != NULL && tab[j])
+		tab = ft_split(trim, ' ');
+		while (trim != NULL && tab[j])
 		{
 			ft_fill_maps(fdf, tab[j], i, j);
 			j++;
 		}
 		ft_fill_rgb(fdf);
-		free(liine);
+		free(trim);
 		j = 0;
 		line = get_next_line(fd);
 		while (tab[j] != 0)
@@ -58,42 +58,6 @@ void	set_maps(t_fdf *fdf, int fd)
 		free(tab);
 	}
 	free(line);
-}
-
-void	ft_malloc_maps(t_fdf *fdf, char *line, int fd)
-{
-	int		i;
-	char	**tab;
-	char	*liine;
-
-	i = 0;
-	line = get_next_line(fd);
-	liine = ft_strtrim(line, "\n");
-	tab = ft_split(liine, ' ');
-	free(liine);
-	while (tab[i] != NULL)
-		i++;
-	fdf->x_max = i;
-	fdf->y_max = 0;
-	while (line != NULL)
-	{
-		free(line);
-		line = get_next_line(fd);
-		fdf->y_max++;
-	}
-	free(line);
-	i = 0;
-	while (tab[i] != '\0')
-		free(tab[i++]);
-	free(tab);
-	fdf->map = (t_point **)malloc(sizeof(t_point *) * (fdf->y_max));
-	if (fdf->map == NULL)
-		exit (0);
-	i = 0;
-	while (i < fdf->y_max)
-		fdf->map[i++] = (t_point *)malloc(sizeof(t_point) * (fdf->x_max));
-	if (fdf->map == NULL)
-		ft_free_map(fdf);
 }
 
 int	ft_parsing(int size, char **argv, t_fdf *fdf)
