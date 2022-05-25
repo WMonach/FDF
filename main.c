@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 16:49:11 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/24 16:22:36 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/25 09:49:45 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,8 @@ int	key_hook(int keycode, t_fdf *fdf)
 int	main(int argc, char **argv)
 {
 	t_fdf	*fdf;
-	int		fd;
-	char	*line;
-	int		i;
 
-	i = 0;
-	line = malloc(sizeof(char) * 1);
-	fd = open(argv[1], 0, O_RDONLY);
-	i = read(fd, line, sizeof(char) * 1);
-	close(fd);
-	free(line);
-	if (i < 0)
+	if (ft_check_read(argv) == 0)
 		return (1);
 	fdf = malloc(sizeof(t_fdf));
 	if (ft_parsing(argc, argv, fdf) == 0)
@@ -62,6 +53,8 @@ int	main(int argc, char **argv)
 		free(fdf);
 		return (1);
 	}
+	ft_calibrate_z(fdf);
+	ft_matrix(fdf, 0.61, 0.61);
 	fdf->vars.mlx = mlx_init();
 	fdf->vars.win = mlx_new_window(fdf->vars.mlx,
 			1920, 1080, "FDF");
@@ -69,8 +62,6 @@ int	main(int argc, char **argv)
 	fdf->data.addr = mlx_get_data_addr((fdf->data.img),
 			&(fdf->data.bits_per_pixel), &(fdf->data.line_length),
 			&(fdf->data.endian));
-	ft_calibrate_z(fdf);
-	ft_matrix(fdf, 0.61, 0.61);
 	mlx_key_hook(fdf->vars.win, key_hook, fdf);
 	ft_draw(&(fdf->data), fdf);
 	mlx_put_image_to_window(fdf->vars.mlx, fdf->vars.win, fdf->data.img, 0, 0);
@@ -83,12 +74,6 @@ void	ft_free_all(t_fdf *fdf)
 	int	i;
 
 	i = -1;
-	printf("data%p\n", fdf->data.img);
-	printf("mlx%p\n", fdf->vars.mlx);
-	printf("win%p\n", fdf->vars.win);
-	printf("map%p\n", fdf->map);
-	printf("fdf%p\n", fdf);
-	printf("dfault%p\n", fdf->dfault);
 	while (++i < fdf->y_max)
 	{
 		free(fdf->map[i]);
@@ -98,10 +83,15 @@ void	ft_free_all(t_fdf *fdf)
 	while (++i < fdf->y_max)
 		free(fdf->dfault[i]);
 	free(fdf->dfault);
-	mlx_destroy_image(fdf->vars.mlx, fdf->data.img);
+	mlx_clear_window(fdf->vars.mlx, fdf->vars.win);
 	mlx_destroy_window(fdf->vars.mlx, fdf->vars.win);
+	mlx_destroy_image(fdf->vars.mlx, fdf->data.img);
+	fdf->data.img = NULL;
+	fdf->vars.win = NULL;
 	free(fdf->vars.mlx);
+	fdf->vars.mlx = NULL;
 	free(fdf);
+	fdf = NULL;
 	exit (0);
 }
 
@@ -119,14 +109,3 @@ void	ft_free_map(t_fdf *fdf)
 	free(fdf);
 	exit (0);
 }
-
-// int	ft_destroy_image(t_fdf *fdf)
-// {
-// 	printf("mallocmap=%p\n", fdf->vars.mlx);
-// 	fdf->y_mat += 0;
-// 	mlx_destroy_image((fdf->vars.mlx), (fdf->data.img));
-// 	mlx_destroy_window((fdf->vars.mlx), (fdf->vars.win));
-// 	free(fdf->vars.mlx);
-// 	free(fdf);
-// 	return (1);
-// }

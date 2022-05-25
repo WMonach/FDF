@@ -6,11 +6,28 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:38:45 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/24 16:09:12 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/25 09:54:10 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+int	ft_check_read(char **argv)
+{
+	int		fd;
+	char	*line;
+	int		i;
+
+	i = 0;
+	line = malloc(sizeof(char) * 1);
+	fd = open(argv[1], 0, O_RDONLY);
+	i = read(fd, line, sizeof(char) * 1);
+	close(fd);
+	free(line);
+	if (i < 0)
+		return (0);
+	return (1);
+}
 
 void	ft_fill_maps(t_fdf	*fdf, char *z_value, int i, int j)
 {
@@ -40,15 +57,12 @@ void	set_maps(t_fdf *fdf, int fd)
 	line = get_next_line(fd);
 	while (++i < fdf->y_max && line != NULL)
 	{
-		j = 0;
+		j = -1;
 		trim = ft_strtrim(line, "\n");
 		free (line);
 		tab = ft_split(trim, ' ');
-		while (trim != NULL && tab[j])
-		{
+		while (trim != NULL && tab[++j])
 			ft_fill_maps(fdf, tab[j], i, j);
-			j++;
-		}
 		ft_fill_rgb(fdf);
 		free(trim);
 		j = 0;
@@ -66,6 +80,7 @@ int	ft_parsing(int size, char **argv, t_fdf *fdf)
 
 	fdf->posy = 540;
 	fdf->posx = 960;
+	fdf->y_max = 0;
 	if (size == 0)
 		return (0);
 	fd = open(argv[1], 0, O_RDONLY);

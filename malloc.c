@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 11:59:18 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/24 16:19:30 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/25 09:50:43 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	ft_malloc_maps(t_fdf *fdf, int fd)
 	while (tab[i] != NULL)
 		i++;
 	fdf->x_max = i;
-	fdf->y_max = 0;
 	while (line != NULL)
 	{
 		free(line);
