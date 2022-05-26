@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: will <will@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 16:49:11 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/25 09:49:45 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/26 15:56:39 by will             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	key_hook(int keycode, t_fdf *fdf)
 	ft_keyhook_translation(keycode, fdf);
 	ft_keyhook_zoom(keycode, fdf);
 	ft_keyhook_rotate(keycode, fdf);
-	if (keycode == 53)
+	if (keycode == 65307)
 	{
 		ft_free_all(fdf);
 		exit (0);
@@ -107,5 +107,5 @@ void	ft_free_map(t_fdf *fdf)
 	mlx_destroy_window((fdf->vars.mlx), (fdf->vars.win));
 	free(fdf->vars.mlx);
 	free(fdf);
-	exit (0);
+	exit (1);
 }
