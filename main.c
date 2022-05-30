@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 16:49:11 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/25 09:49:45 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/25 14:27:12 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	ft_free_all(t_fdf *fdf)
 	int	i;
 
 	i = -1;
+	printf("free_all\n");
 	while (++i < fdf->y_max)
 	{
 		free(fdf->map[i]);
