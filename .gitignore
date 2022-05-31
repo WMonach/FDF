@@ -1,5 +1,4 @@
 **/*.o
 .objs/
 *.txt
-mlx/
 fdf
