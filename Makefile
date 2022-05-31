@@ -6,7 +6,7 @@
 #    By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 17:48:16 by wmonacho          #+#    #+#              #
-#    Updated: 2022/05/31 08:39:31 by wmonacho         ###   ########lyon.fr    #
+#    Updated: 2022/05/31 08:44:26 by wmonacho         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SFLAGS =	-fsanitize=address -g
 
 CC =		gcc
 
-LIBSDIR =	../libft/
+LIBSDIR =	libft/
 
 OBJS_DIR = .objs
 

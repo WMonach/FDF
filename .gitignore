@@ -1,6 +1,5 @@
 **/*.o
 .objs/
-get_next_line/
 *.txt
 mlx/
 fdf
