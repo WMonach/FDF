@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:40:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/30 08:40:39 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/31 08:40:07 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include <stdlib.h>
 # include <string.h>
 # include <math.h>
-# include "../get_next_line/get_next_line.h"
-# include "../libft/libft.h"
+# include "get_next_line/get_next_line.h"
+# include "libft/libft.h"
 # include "mlx/mlx.h"
 
 typedef struct s_default

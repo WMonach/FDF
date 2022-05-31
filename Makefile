@@ -6,7 +6,7 @@
 #    By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 17:48:16 by wmonacho          #+#    #+#              #
-#    Updated: 2022/05/30 09:07:29 by wmonacho         ###   ########lyon.fr    #
+#    Updated: 2022/05/31 08:39:31 by wmonacho         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,8 +32,8 @@ FILES = main.c									\
 		calibration.c							\
 		keyhook.c								\
 		malloc.c								\
-		../get_next_line/get_next_line.c		\
-		../get_next_line/get_next_line_utils.c	\
+		get_next_line/get_next_line.c		\
+		get_next_line/get_next_line_utils.c	\
 		matrix.rotation.c						\
 
 all: libs $(NAME)
