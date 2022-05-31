@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: will <will@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:38:45 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/25 09:54:10 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/26 14:37:53 by will             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,14 @@ void	set_maps(t_fdf *fdf, int fd)
 		tab = ft_split(trim, ' ');
 		while (trim != NULL && tab[++j])
 			ft_fill_maps(fdf, tab[j], i, j);
-		ft_fill_rgb(fdf);
 		free(trim);
 		j = 0;
 		line = get_next_line(fd);
-		while (tab[j] != 0)
+		while (tab[j] != NULL)
 			free(tab[j++]);
 		free(tab);
 	}
+	ft_fill_rgb(fdf);
 	free(line);
 }
 
@@ -86,11 +86,11 @@ int	ft_parsing(int size, char **argv, t_fdf *fdf)
 	fd = open(argv[1], 0, O_RDONLY);
 	ft_malloc_maps(fdf, fd);
 	close(fd);
-	fd = open(argv[1], 0, O_RDONLY);
-	set_maps(fdf, fd);
-	close(fd);
 	fdf->distx = (1920) / (fdf->x_max) * 0.75;
 	fdf->disty = (1080) / (fdf->y_max) * 0.75;
 	fdf->dist = ft_calculate_diff(fdf->distx, fdf->disty);
+	fd = open(argv[1], 0, O_RDONLY);
+	set_maps(fdf, fd);
+	close(fd);
 	return (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rgb.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: will <will@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 14:16:24 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/12 13:29:03 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/26 14:34:36 by will             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	ft_fill_rgb(t_fdf *fdf)
 
 void	ft_rgb(t_fdf *fdf, int i, int j)
 {
+	// printf("distz=%f\n", fdf->map[i][j].z);
 	if (fdf->map[i][j].z <= fdf->distz / 3)
 	{
 		fdf->map[i][j].colorx = 0x0000ff;

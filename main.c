@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 16:49:11 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/25 14:27:12 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/31 08:34:22 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void	ft_free_all(t_fdf *fdf)
 	int	i;
 
 	i = -1;
-	printf("free_all\n");
 	while (++i < fdf->y_max)
 	{
 		free(fdf->map[i]);
@@ -85,11 +84,10 @@ void	ft_free_all(t_fdf *fdf)
 		free(fdf->dfault[i]);
 	free(fdf->dfault);
 	mlx_clear_window(fdf->vars.mlx, fdf->vars.win);
-	mlx_destroy_window(fdf->vars.mlx, fdf->vars.win);
 	mlx_destroy_image(fdf->vars.mlx, fdf->data.img);
+	mlx_destroy_window(fdf->vars.mlx, fdf->vars.win);
 	fdf->data.img = NULL;
 	fdf->vars.win = NULL;
-	free(fdf->vars.mlx);
 	fdf->vars.mlx = NULL;
 	free(fdf);
 	fdf = NULL;
@@ -108,5 +106,5 @@ void	ft_free_map(t_fdf *fdf)
 	mlx_destroy_window((fdf->vars.mlx), (fdf->vars.win));
 	free(fdf->vars.mlx);
 	free(fdf);
-	exit (0);
+	exit (1);
 }

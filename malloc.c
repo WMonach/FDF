@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   malloc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: will <will@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 11:59:18 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/05/25 09:50:43 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/05/26 14:41:13 by will             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,17 @@ void	ft_malloc_dfault(t_fdf *fdf)
 {
 	int	i;
 
-	i = 0;
+	i = -1;
 	fdf->dfault = (t_default **)malloc(sizeof(t_default *) * (fdf->y_max));
 	if (fdf->dfault == NULL)
 		return (ft_free_all(fdf));
-	while (i < fdf->y_max)
-		fdf->dfault[i++] = (t_default *)malloc(sizeof(t_default)
+	while (++i < fdf->y_max)
+	{
+		fdf->dfault[i] = (t_default *)malloc(sizeof(t_default)
 				* (fdf->x_max));
-	if (fdf->dfault[i] == NULL)
-		return (ft_free_all(fdf));
+		if (fdf->dfault[i] == NULL)
+			return (ft_free_all(fdf));
+	}
 }
 
 void	ft_malloc_mapsbis(t_fdf *fdf)
@@ -64,7 +66,7 @@ void	ft_malloc_maps(t_fdf *fdf, int fd)
 	}
 	free(line);
 	i = 0;
-	while (tab[i] != '\0')
+	while (tab[i] != NULL)
 		free(tab[i++]);
 	free(tab);
 	ft_malloc_mapsbis(fdf);
